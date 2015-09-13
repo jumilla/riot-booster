@@ -1,0 +1,3 @@
+<bs-carousel>
+
+</bs-carousel>

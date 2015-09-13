@@ -1,0 +1,39 @@
+{
+  "name": "riot-booster",
+  "version": "0.0.2",
+  "description": "Twitter Bootstrap 4 on Riot 2.2",
+  "keywords": [
+    "css",
+    "riot",
+    "tag",
+    "bootstrap",
+    "bootstrap4",
+    "front-end",
+    "component",
+    "web"
+  ],
+  "author": "Fumio Furukawa",
+  "license": "MIT",
+  "main": "./dist/js/npm",
+  "files": [
+    "components",
+    "LICENSE.txt"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jumilla/riot-booster.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jumilla/riot-booster/issues"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-riot": "^0.3.0",
+    "gulp-uglify": "^1.4.1",
+    "riot": "^2.2.4"
+  }
+}
