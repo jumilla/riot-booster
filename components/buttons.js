@@ -5,9 +5,9 @@
  * @param string size - {large | medium | small}
  * @param bool outline - default is false.
  * @param bool active - default is false.
- * @param function onpushed
+ * @param function onpush
  */
-riot.tag('bs-button', '<yield></yield>', 'type="button" class="{ classes }" __disabled="{ opts.disabled }" onclick="{ opts.onpushed }"', function(opts) {
+riot.tag('bs-button', '<yield></yield>', 'type="button" class="{ classes }" __disabled="{ opts.disabled }" onclick="{ opts.onpush }"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -44,20 +44,22 @@ riot.tag('bs-button', '<yield></yield>', 'type="button" class="{ classes }" __di
     
 });
 
-/*
- * rbs-button-group
+/**
+ * bs-button-group
  *
  * @param string size - {large | medium | small | x-small}
  * @param string label
  * @param bool vertical - default is false.
  */
-riot.tag('bs-button-group', '<yield></yield>', 'bs-button-group, [riot-tag="bs-button-group"]{ display: block; }', 'role="group" aria-label="{ opts.label }"', function(opts) {
+riot.tag('bs-button-group', '<yield></yield>', 'bs-button-group, [riot-tag="bs-button-group"]{ display: block; }', 'role="group" class="{ classes }" aria-label="{ opts.label }"', function(opts) {
         this.mixin('scope')
 
-        var classes = []
-        classes.push(opts.vertical ? 'btn-group-vertical' : 'btn-group')
-        classes.push(sizeClass(opts.size || 'medium'))
-        this.root.className = classes.join(' ')
+        var classes = [
+            opts.vertical ? 'btn-group-vertical' : 'btn-group',
+            sizeClass(opts.size || 'medium'),
+            opts.class || '',
+        ]
+        this.classes = classes.join(' ')
 
         function sizeClass(name) {
             var sizes = {
@@ -76,20 +78,18 @@ riot.tag('bs-button-group', '<yield></yield>', 'bs-button-group, [riot-tag="bs-b
     
 });
 
-/*
- * rbs-button-toolbar
+/**
+ * bs-button-toolbar
  *
  * @param string label
  */
-riot.tag('bs-button-toolbar', '<yield></yield>', 'role="toolbar" aria-label="{ opts.label }"', function(opts) {
+riot.tag('bs-button-toolbar', '<yield></yield>', 'bs-button-toolbar, [riot-tag="bs-button-toolbar"]{ display: block; }', 'role="toolbar" class="{ classes }" aria-label="{ opts.label }"', function(opts) {
         this.mixin('scope')
 
-        var classes = ['btn-toolbar']
-        this.root.className = classes.join(' ')
+        var classes = [
+            'btn-toolbar',
+            opts.class || '',
+        ]
+        this.classes = classes.join(' ')
     
-});
-
-riot.tag('bs-dropbown-menu', '', function(opts) {
-
-
 });

@@ -19,6 +19,12 @@
         ]
         this.classes = classes.join(' ')
     </script>
+
+    <style scoped>
+        :scope {
+            display: block;
+        }
+    </style>
 </bs-card>
 
 /**
@@ -37,19 +43,31 @@
         ]
         this.classes = classes.join(' ')
     </script>
+
+    <style scoped>
+        :scope {
+            display: block;
+        }
+    </style>
 </bs-card-header>
 
 /**
- * bs-card-body
+ * bs-card-block
  *
  */
-<bs-card-body class="card-body">
+<bs-card-block class="card-block">
     <yield/>
 
     <script>
         this.mixin('scope')
     </script>
-</bs-card-body>
+
+    <style scoped>
+        :scope {
+            display: block;
+        }
+    </style>
+</bs-card-block>
 
 /**
  * bs-card-footer
@@ -61,6 +79,12 @@
     <script>
         this.mixin('scope')
     </script>
+
+    <style scoped>
+        :scope {
+            display: block;
+        }
+    </style>
 </bs-card-footer>
 
 /**
@@ -73,6 +97,12 @@
     <script>
         this.mixin('scope')
     </script>
+
+    <style scoped>
+        :scope {
+            display: block;
+        }
+    </style>
 </bs-card-group>
 
 /**
@@ -85,6 +115,12 @@
     <script>
         this.mixin('scope')
     </script>
+
+    <style scoped>
+        :scope {
+            display: block;
+        }
+    </style>
 </bs-card-deck>
 
 /**
@@ -97,4 +133,10 @@
     <script>
         this.mixin('scope')
     </script>
+
+    <style scoped>
+        :scope {
+            display: block;
+        }
+    </style>
 </bs-card-columns>

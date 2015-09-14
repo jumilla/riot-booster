@@ -24,6 +24,11 @@
         }
     </script>
 
+    <style scoped>
+        :scope {
+            display: block;
+        }
+    </style>
 </bs-grid>
 
 /**
@@ -42,6 +47,12 @@
         ]
         this.classes = classes.join(' ')
     </script>
+
+    <style scoped>
+        :scope {
+            display: block;
+        }
+    </style>
 </bs-grid-row>
 
 /**

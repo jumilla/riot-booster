@@ -5,7 +5,7 @@
  * @param string img-src - [Optional]
  * @param string img-alt - [Optional]
  */
-riot.tag('bs-card', '<img if="{ opts[\'img-src\'] }" class="card-img-top" data-src="{ opts[\'img-src\'] }" alt="{ opts[\'img-alt\'] }"> <yield></yield>', 'class="{ classes }"', function(opts) {
+riot.tag('bs-card', '<img if="{ opts[\'img-src\'] }" class="card-img-top" data-src="{ opts[\'img-src\'] }" alt="{ opts[\'img-alt\'] }"> <yield></yield>', 'bs-card, [riot-tag="bs-card"]{ display: block; }', 'class="{ classes }"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -21,7 +21,7 @@ riot.tag('bs-card', '<img if="{ opts[\'img-src\'] }" class="card-img-top" data-s
  * bs-card-header
  *
  */
-riot.tag('bs-card-header', '<yield></yield>', 'class="{ this.classes }"', function(opts) {
+riot.tag('bs-card-header', '<yield></yield>', 'bs-card-header, [riot-tag="bs-card-header"]{ display: block; }', 'class="{ this.classes }"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -33,10 +33,10 @@ riot.tag('bs-card-header', '<yield></yield>', 'class="{ this.classes }"', functi
 });
 
 /**
- * bs-card-body
+ * bs-card-block
  *
  */
-riot.tag('bs-card-body', '<yield></yield>', 'class="card-body"', function(opts) {
+riot.tag('bs-card-block', '<yield></yield>', 'bs-card-block, [riot-tag="bs-card-block"]{ display: block; }', 'class="card-block"', function(opts) {
         this.mixin('scope')
     
 });
@@ -45,7 +45,7 @@ riot.tag('bs-card-body', '<yield></yield>', 'class="card-body"', function(opts) 
  * bs-card-footer
  *
  */
-riot.tag('bs-card-footer', '<yield></yield>', 'class="card-footer"', function(opts) {
+riot.tag('bs-card-footer', '<yield></yield>', 'bs-card-footer, [riot-tag="bs-card-footer"]{ display: block; }', 'class="card-footer"', function(opts) {
         this.mixin('scope')
     
 });
@@ -54,7 +54,7 @@ riot.tag('bs-card-footer', '<yield></yield>', 'class="card-footer"', function(op
  * bs-card-group
  *
  */
-riot.tag('bs-card-group', '<yield></yield>', 'class="card-group"', function(opts) {
+riot.tag('bs-card-group', '<yield></yield>', 'bs-card-group, [riot-tag="bs-card-group"]{ display: block; }', 'class="card-group"', function(opts) {
         this.mixin('scope')
     
 });
@@ -63,7 +63,7 @@ riot.tag('bs-card-group', '<yield></yield>', 'class="card-group"', function(opts
  * bs-card-deck
  *
  */
-riot.tag('bs-card-deck', '<yield></yield>', 'class="card-deck"', function(opts) {
+riot.tag('bs-card-deck', '<yield></yield>', 'bs-card-deck, [riot-tag="bs-card-deck"]{ display: block; }', 'class="card-deck"', function(opts) {
         this.mixin('scope')
     
 });
@@ -72,7 +72,7 @@ riot.tag('bs-card-deck', '<yield></yield>', 'class="card-deck"', function(opts) 
  * bs-card-columns
  *
  */
-riot.tag('bs-card-columns', '<yield></yield>', 'class="card-columns"', function(opts) {
+riot.tag('bs-card-columns', '<yield></yield>', 'bs-card-columns, [riot-tag="bs-card-columns"]{ display: block; }', 'class="card-columns"', function(opts) {
         this.mixin('scope')
     
 });

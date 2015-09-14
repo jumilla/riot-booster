@@ -61,9 +61,9 @@ riot.tag('bs-breadcrumb', '<ol class="{ classes }"> <li each="{ opts.items }" cl
  * @param string size - {large | medium | small}
  * @param bool outline - default is false.
  * @param bool active - default is false.
- * @param function onpushed
+ * @param function onpush
  */
-riot.tag('bs-button', '<yield></yield>', 'type="button" class="{ classes }" __disabled="{ opts.disabled }" onclick="{ opts.onpushed }"', function(opts) {
+riot.tag('bs-button', '<yield></yield>', 'type="button" class="{ classes }" __disabled="{ opts.disabled }" onclick="{ opts.onpush }"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -100,20 +100,22 @@ riot.tag('bs-button', '<yield></yield>', 'type="button" class="{ classes }" __di
     
 });
 
-/*
- * rbs-button-group
+/**
+ * bs-button-group
  *
  * @param string size - {large | medium | small | x-small}
  * @param string label
  * @param bool vertical - default is false.
  */
-riot.tag('bs-button-group', '<yield></yield>', 'bs-button-group, [riot-tag="bs-button-group"]{ display: block; }', 'role="group" aria-label="{ opts.label }"', function(opts) {
+riot.tag('bs-button-group', '<yield></yield>', 'bs-button-group, [riot-tag="bs-button-group"]{ display: block; }', 'role="group" class="{ classes }" aria-label="{ opts.label }"', function(opts) {
         this.mixin('scope')
 
-        var classes = []
-        classes.push(opts.vertical ? 'btn-group-vertical' : 'btn-group')
-        classes.push(sizeClass(opts.size || 'medium'))
-        this.root.className = classes.join(' ')
+        var classes = [
+            opts.vertical ? 'btn-group-vertical' : 'btn-group',
+            sizeClass(opts.size || 'medium'),
+            opts.class || '',
+        ]
+        this.classes = classes.join(' ')
 
         function sizeClass(name) {
             var sizes = {
@@ -132,23 +134,22 @@ riot.tag('bs-button-group', '<yield></yield>', 'bs-button-group, [riot-tag="bs-b
     
 });
 
-/*
- * rbs-button-toolbar
+/**
+ * bs-button-toolbar
  *
  * @param string label
  */
-riot.tag('bs-button-toolbar', '<yield></yield>', 'role="toolbar" aria-label="{ opts.label }"', function(opts) {
+riot.tag('bs-button-toolbar', '<yield></yield>', 'bs-button-toolbar, [riot-tag="bs-button-toolbar"]{ display: block; }', 'role="toolbar" class="{ classes }" aria-label="{ opts.label }"', function(opts) {
         this.mixin('scope')
 
-        var classes = ['btn-toolbar']
-        this.root.className = classes.join(' ')
+        var classes = [
+            'btn-toolbar',
+            opts.class || '',
+        ]
+        this.classes = classes.join(' ')
     
 });
 
-riot.tag('bs-dropbown-menu', '', function(opts) {
-
-
-});
 /**
  * bs-card
  *
@@ -156,7 +157,7 @@ riot.tag('bs-dropbown-menu', '', function(opts) {
  * @param string img-src - [Optional]
  * @param string img-alt - [Optional]
  */
-riot.tag('bs-card', '<img if="{ opts[\'img-src\'] }" class="card-img-top" data-src="{ opts[\'img-src\'] }" alt="{ opts[\'img-alt\'] }"> <yield></yield>', 'class="{ classes }"', function(opts) {
+riot.tag('bs-card', '<img if="{ opts[\'img-src\'] }" class="card-img-top" data-src="{ opts[\'img-src\'] }" alt="{ opts[\'img-alt\'] }"> <yield></yield>', 'bs-card, [riot-tag="bs-card"]{ display: block; }', 'class="{ classes }"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -172,7 +173,7 @@ riot.tag('bs-card', '<img if="{ opts[\'img-src\'] }" class="card-img-top" data-s
  * bs-card-header
  *
  */
-riot.tag('bs-card-header', '<yield></yield>', 'class="{ this.classes }"', function(opts) {
+riot.tag('bs-card-header', '<yield></yield>', 'bs-card-header, [riot-tag="bs-card-header"]{ display: block; }', 'class="{ this.classes }"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -184,10 +185,10 @@ riot.tag('bs-card-header', '<yield></yield>', 'class="{ this.classes }"', functi
 });
 
 /**
- * bs-card-body
+ * bs-card-block
  *
  */
-riot.tag('bs-card-body', '<yield></yield>', 'class="card-body"', function(opts) {
+riot.tag('bs-card-block', '<yield></yield>', 'bs-card-block, [riot-tag="bs-card-block"]{ display: block; }', 'class="card-block"', function(opts) {
         this.mixin('scope')
     
 });
@@ -196,7 +197,7 @@ riot.tag('bs-card-body', '<yield></yield>', 'class="card-body"', function(opts) 
  * bs-card-footer
  *
  */
-riot.tag('bs-card-footer', '<yield></yield>', 'class="card-footer"', function(opts) {
+riot.tag('bs-card-footer', '<yield></yield>', 'bs-card-footer, [riot-tag="bs-card-footer"]{ display: block; }', 'class="card-footer"', function(opts) {
         this.mixin('scope')
     
 });
@@ -205,7 +206,7 @@ riot.tag('bs-card-footer', '<yield></yield>', 'class="card-footer"', function(op
  * bs-card-group
  *
  */
-riot.tag('bs-card-group', '<yield></yield>', 'class="card-group"', function(opts) {
+riot.tag('bs-card-group', '<yield></yield>', 'bs-card-group, [riot-tag="bs-card-group"]{ display: block; }', 'class="card-group"', function(opts) {
         this.mixin('scope')
     
 });
@@ -214,7 +215,7 @@ riot.tag('bs-card-group', '<yield></yield>', 'class="card-group"', function(opts
  * bs-card-deck
  *
  */
-riot.tag('bs-card-deck', '<yield></yield>', 'class="card-deck"', function(opts) {
+riot.tag('bs-card-deck', '<yield></yield>', 'bs-card-deck, [riot-tag="bs-card-deck"]{ display: block; }', 'class="card-deck"', function(opts) {
         this.mixin('scope')
     
 });
@@ -223,7 +224,7 @@ riot.tag('bs-card-deck', '<yield></yield>', 'class="card-deck"', function(opts) 
  * bs-card-columns
  *
  */
-riot.tag('bs-card-columns', '<yield></yield>', 'class="card-columns"', function(opts) {
+riot.tag('bs-card-columns', '<yield></yield>', 'bs-card-columns, [riot-tag="bs-card-columns"]{ display: block; }', 'class="card-columns"', function(opts) {
         this.mixin('scope')
     
 });
@@ -239,7 +240,7 @@ riot.tag('bs-carousel', '', function(opts) {
  * @param string button-type [Optional:'secondary']
  * @param array items [Required]
  */
-riot.tag('bs-dropdown', '<button name="button" class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> { opts.title || \'Menu\' } </button> <bs-dropdown-menu items="{ opts.items }"> <yield></yield> </bs-dropdown-menu>', 'class="{ classes }"', function(opts) {
+riot.tag('bs-dropdown', '<button name="button" class="btn dropdown-toggle" type="button" data-toggle="dropdown"> { opts.title || \'Menu\' } </button> <bs-dropdown-menu items="{ opts.items }"> <yield></yield> </bs-dropdown-menu>', 'class="{ classes }"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -261,8 +262,7 @@ riot.tag('bs-dropdown', '<button name="button" class="btn dropdown-toggle" type=
  *              item.disabled:
  *              item.link:
  *              item.target:
- *              item.onpushed:
- * @param bool pill
+ *              item.onpush:
  */
 riot.tag('bs-dropdown-menu', '<yield></yield>', 'class="{ classes }"', function(opts) {
         this.mixin('scope')
@@ -319,7 +319,7 @@ riot.tag('bs-dropdown-menu', '<yield></yield>', 'class="{ classes }"', function(
                 el.classList.add('btn-' + item['button-type'])
             }
             el.setAttribute('type', item.button)
-            el.addEventListener('click', opts.onpushed)
+            el.addEventListener('click', opts.onpush)
             el.appendChild(document.createTextNode(item.title || '(No text)'))
             return el
         }
@@ -341,16 +341,141 @@ riot.tag('bs-dropdown-menu', '<yield></yield>', 'class="{ classes }"', function(
 /**
  * bs-form
  */
-riot.tag('bs-form', '', function(opts) {
+riot.tag('bs-form', '<form name="form" class="{ classes }"> <yield></yield> </form>', function(opts) {
+		this.mixin('scope')
 
+		var classes = [
+			opts.inline ? 'form-inline' : '',
+		]
+		this.classes = classes.join(' ')
 
+		this.loadBindings = function() {
+			if (!opts.bindings) return
+
+			var nodes = this.form.querySelectorAll('[name]')
+
+			for (var index in nodes) {
+				var node = nodes[index];
+				if (node.name in opts.bindings) {
+					node.value = opts.bindings[node.name]
+				}
+			}
+		}.bind(this);
+
+		this.saveBindings = function() {
+			if (!opts.bindings) return
+
+			var nodes = this.form.querySelectorAll('[name]')
+
+			for (var index in nodes) {
+				var node = nodes[index];
+				if (node.name in opts.bindings) {
+					opts.bindings[node.name] = node.value
+				}
+			}
+		}.bind(this);
+
+		this.on('mount', function () {
+			this.loadBindings()
+
+			this.form.addEventListener('submit', function (e) {
+				e.preventDefault()
+
+				this.saveBindings()
+
+				if (opts.onsubmit) {
+					opts.onsubmit(e)
+				}
+			}.bind(this), true)
+		})
+	
 });
+
+/**
+ * bs-input-static
+ */
+riot.tag('bs-input-static', '<p class="{ classes }">{ opts.value }</p>', function(opts) {
+		var classes = [
+			'form-control-static',
+		]
+		this.classes = classes.join(' ')
+	
+});
+
+/**
+ * bs-input
+ */
+riot.tag('bs-input', '<input type="{ opts.type }" class="{ classes }" name="{ opts.name }" value="{ opts.value }">', function(opts) {
+		var classes = [
+			'form-control',
+		]
+		this.classes = classes.join(' ')
+	
+});
+
+/**
+ * bs-input-text
+ */
+riot.tag('bs-input-text', '<label for="{ opts.id }">{ opts.label }<yield></yield></label> <input type="{ opts.type || \'text\' }" class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }"> </bs-input-text> /** * bs-input-textarea */ <bs-input-text> <label for="{ opts.id }">{ opts.label }<yield></yield></label> <textarea class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }" row="{ opts.row }" col="{ opts.col }">{ opts.value }</textarea>', function(opts) {
+		var classes = [
+			'form-control',
+		]
+		this.classes = classes.join(' ')
+	
+});
+
+/**
+ * bs-input-file
+ */
+riot.tag('bs-input-file', '<input type="file" class="{ classes }" name="{ opts.name }" value="{ opts.value }">', function(opts) {
+		var classes = [
+			'form-control-file',
+		]
+		this.classes = classes.join(' ')
+	
+});
+
+/**
+ * bs-input-checkbox
+ */
+riot.tag('bs-input-checkbox', '<label> <input type="checkbox" class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }"> { opts.label } <yield></yield> </label>', 'class="checkbox"', function(opts) {
+		var classes = [
+			'form-control',
+		]
+		this.classes = classes.join(' ')
+	
+});
+
+/**
+ * bs-input-radio
+ */
+riot.tag('bs-input-radio', '<label> <input type="radio" class="{ classes }" name="{ opts.name }" value="{ opts.value }" __checked="{ opts.checked }"> { opts.label } <yield></yield> </label>', 'class="radio"', function(opts) {
+		var classes = [
+			'form-control',
+		]
+		this.classes = classes.join(' ')
+	
+});
+
+/**
+ * bs-fieldset
+ */
+riot.tag('bs-fieldset', '<yield></yield>', 'class="{ classes }"', function(opts) {
+		this.mixin('scope')
+
+		var classes = [
+			'form-group',
+		]
+		this.classes = classes.join(' ')
+	
+});
+
 /**
  * bs-grid
  *
  * @param string type - {fixed | fluid}
  */
-riot.tag('bs-grid', '<yield></yield>', 'class="{ classes }"', function(opts) {
+riot.tag('bs-grid', '<yield></yield>', 'bs-grid, [riot-tag="bs-grid"]{ display: block; }', 'class="{ classes }"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -373,7 +498,7 @@ riot.tag('bs-grid', '<yield></yield>', 'class="{ classes }"', function(opts) {
  * bs-grid-row
  *
  */
-riot.tag('bs-grid-row', '<yield></yield>', 'class="{ classes }"', function(opts) {
+riot.tag('bs-grid-row', '<yield></yield>', 'bs-grid-row, [riot-tag="bs-grid-row"]{ display: block; }', 'class="{ classes }"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -487,10 +612,16 @@ riot.tag('bs-media', '<yield></yield>', 'class="media"', function(opts) {
  * @param string size - {large | medium | small}
  * @param bool fade -
  */
-riot.tag('bs-modal', '<div name="dialog" class="modal-dialog" role="document"> <div class="modal-content"> <yield></yield> </div> </div>', 'class="{ fade: opts.fade }"', function(opts) {
+riot.tag('bs-modal', '<div name="dialog" class="modal-dialog" role="document"> <div class="modal-content"> <yield></yield> </div> </div>', 'bs-modal, [riot-tag="bs-modal"]{ display: block; }', 'class="{ classes }"', function(opts) {
         this.mixin('scope')
 
-        this.root.classList.add('modal')
+        var classes = [
+            'modal',
+            opts.fade ? 'fade' : '',
+            opts.inverse ? 'card-inverse' : '',
+            opts.class || '',
+        ]
+        this.classes = classes.join(' ')
 
         var size = sizeClass(opts.size || 'medium')
         if (size) this.dialog.classList.add(size)
@@ -503,6 +634,22 @@ riot.tag('bs-modal', '<div name="dialog" class="modal-dialog" role="document"> <
             }
             return sizes[name]
         }
+
+        this.show = function() {
+            $(this.root).modal('show')
+        }.bind(this);
+
+        this.hide = function() {
+            $(this.root).modal('hide')
+        }.bind(this);
+
+        this.toggle = function() {
+            $(this.root).modal('toggle')
+        }.bind(this);
+
+        this.modal = function(options) {
+            $(this.root).modal(options)
+        }.bind(this);
     
 });
 
@@ -511,7 +658,7 @@ riot.tag('bs-modal', '<div name="dialog" class="modal-dialog" role="document"> <
  *
  * @param bool closebox
  */
-riot.tag('bs-modal-header', '<yield></yield> <button if="{ opts.closebox }" type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> <span class="sr-only">Close</span> </button>', 'class="modal-header"', function(opts) {
+riot.tag('bs-modal-header', '<button if="{ opts.closebox }" type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> <span class="sr-only">Close</span> </button> <yield></yield>', 'bs-modal-header, [riot-tag="bs-modal-header"]{ display: block; }', 'class="modal-header"', function(opts) {
         this.mixin('scope')
     
 });
@@ -520,7 +667,7 @@ riot.tag('bs-modal-header', '<yield></yield> <button if="{ opts.closebox }" type
  * bs-modal-body
  *
  */
-riot.tag('bs-modal-body', '<yield></yield>', 'class="modal-body"', function(opts) {
+riot.tag('bs-modal-body', '<yield></yield>', 'bs-modal-body, [riot-tag="bs-modal-body"]{ display: block; }', 'class="modal-body"', function(opts) {
         this.mixin('scope')
     
 });
@@ -529,8 +676,28 @@ riot.tag('bs-modal-body', '<yield></yield>', 'class="modal-body"', function(opts
  * bs-modal-footer
  *
  */
-riot.tag('bs-modal-footer', '<yield></yield>', 'class="modal-footer"', function(opts) {
+riot.tag('bs-modal-footer', '<yield></yield>', 'bs-modal-footer, [riot-tag="bs-modal-footer"]{ display: block; }', 'class="modal-footer"', function(opts) {
         this.mixin('scope')
+    
+});
+
+/**
+ * bs-navbar
+ *
+ * @param string type
+ * @param string placement - {fixed-top | fixed-bottom}
+ */
+riot.tag('bs-navbar', '<nav if="{ !opts.collapse }" class="{ classes }"> <yield></yield> </nav> <nav if="{ opts.collapse }" class="{ classes }"> <button type="button" class="navbar-toggler hidden-sm-up" data-toggle="collapse"> &#9776; </button> <div class="collapse navbar-toggleable-xs"> <yield></yield> </div> </nav>', function(opts) {
+        this.mixin('scope')
+
+        var classes = [
+            'navbar',
+            opts.type ? 'navbar-' + opts.type : '',
+            opts.placement ? 'navbar-' + opts.placement : '',
+            opts.faded ? 'faded' : '',
+            opts.class || '',
+        ]
+        this.classes = classes.join(' ')
     
 });
 
@@ -564,26 +731,6 @@ riot.tag('bs-nav', '<nav if="{ opts.type === \'inline\' }" class="{ classes }"> 
 });
 
 
-/**
- * bs-navbar
- *
- * @param string type
- * @param string placement - {fixed-top | fixed-bottom}
- */
-riot.tag('bs-navbar', '<nav if="{ !opts.collapse }" class="{ classes }"> <yield></yield> </nav> <nav if="{ opts.collapse }" class="{ classes }"> <button type="button" class="navbar-toggler hidden-sm-up" data-toggle="collapse"> &#9776; </button> <div class="collapse navbar-toggleable-xs"> <yield></yield> </div> </nav>', function(opts) {
-        this.mixin('scope')
-
-        var classes = [
-            'navbar',
-            opts.type ? 'navbar-' + opts.type : '',
-            opts.placement ? 'navbar-' + opts.placement : '',
-            opts.faded ? 'faded' : '',
-            opts.class || '',
-        ]
-        this.classes = classes.join(' ')
-    
-});
-
 riot.tag('bs-table', '<table class="{ classes }"> <yield></yield> </table>', function(opts) {
         this.mixin('scope')
 
@@ -598,3 +745,9 @@ riot.tag('bs-tooltip', '', function(opts) {
 
 
 });
+riot.mixin('scope', {
+    init: function () {
+        if (this.parent)
+            this.__proto__ = this.parent
+    }
+})

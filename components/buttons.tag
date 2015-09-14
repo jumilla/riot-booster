@@ -5,9 +5,9 @@
  * @param string size - {large | medium | small}
  * @param bool outline - default is false.
  * @param bool active - default is false.
- * @param function onpushed
+ * @param function onpush
  */
-<bs-button type="button" class="{ classes }" disabled="{ opts.disabled }" onclick="{ opts.onpushed }">
+<bs-button type="button" class="{ classes }" disabled="{ opts.disabled }" onclick="{ opts.onpush }">
     <yield/>
 
     <script>
@@ -49,23 +49,25 @@
     </script>
 </bs-button>
 
-/*
- * rbs-button-group
+/**
+ * bs-button-group
  *
  * @param string size - {large | medium | small | x-small}
  * @param string label
  * @param bool vertical - default is false.
  */
-<bs-button-group role="group" aria-label="{ opts.label }">
+<bs-button-group role="group" class="{ classes }" aria-label="{ opts.label }">
     <yield/>
 
     <script>
         this.mixin('scope')
 
-        var classes = []
-        classes.push(opts.vertical ? 'btn-group-vertical' : 'btn-group')
-        classes.push(sizeClass(opts.size || 'medium'))
-        this.root.className = classes.join(' ')
+        var classes = [
+            opts.vertical ? 'btn-group-vertical' : 'btn-group',
+            sizeClass(opts.size || 'medium'),
+            opts.class || '',
+        ]
+        this.classes = classes.join(' ')
 
         function sizeClass(name) {
             var sizes = {
@@ -90,22 +92,27 @@
     </style>
 </bs-button-group>
 
-/*
- * rbs-button-toolbar
+/**
+ * bs-button-toolbar
  *
  * @param string label
  */
-<bs-button-toolbar role="toolbar" aria-label="{ opts.label }">
+<bs-button-toolbar role="toolbar" class="{ classes }" aria-label="{ opts.label }">
     <yield/>
 
     <script>
         this.mixin('scope')
 
-        var classes = ['btn-toolbar']
-        this.root.className = classes.join(' ')
+        var classes = [
+            'btn-toolbar',
+            opts.class || '',
+        ]
+        this.classes = classes.join(' ')
     </script>
+
+    <style scoped>
+        :scope {
+            display: block;
+        }
+    </style>
 </bs-button-toolbar>
-
-<bs-dropbown-menu>
-
-</bs-dropbown-menu>

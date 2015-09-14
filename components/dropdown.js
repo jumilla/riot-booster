@@ -5,7 +5,7 @@
  * @param string button-type [Optional:'secondary']
  * @param array items [Required]
  */
-riot.tag('bs-dropdown', '<button name="button" class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> { opts.title || \'Menu\' } </button> <bs-dropdown-menu items="{ opts.items }"> <yield></yield> </bs-dropdown-menu>', 'class="{ classes }"', function(opts) {
+riot.tag('bs-dropdown', '<button name="button" class="btn dropdown-toggle" type="button" data-toggle="dropdown"> { opts.title || \'Menu\' } </button> <bs-dropdown-menu items="{ opts.items }"> <yield></yield> </bs-dropdown-menu>', 'class="{ classes }"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -27,8 +27,7 @@ riot.tag('bs-dropdown', '<button name="button" class="btn dropdown-toggle" type=
  *              item.disabled:
  *              item.link:
  *              item.target:
- *              item.onpushed:
- * @param bool pill
+ *              item.onpush:
  */
 riot.tag('bs-dropdown-menu', '<yield></yield>', 'class="{ classes }"', function(opts) {
         this.mixin('scope')
@@ -85,7 +84,7 @@ riot.tag('bs-dropdown-menu', '<yield></yield>', 'class="{ classes }"', function(
                 el.classList.add('btn-' + item['button-type'])
             }
             el.setAttribute('type', item.button)
-            el.addEventListener('click', opts.onpushed)
+            el.addEventListener('click', opts.onpush)
             el.appendChild(document.createTextNode(item.title || '(No text)'))
             return el
         }

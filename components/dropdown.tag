@@ -6,7 +6,7 @@
  * @param array items [Required]
  */
 <bs-dropdown class="{ classes }">
-    <button name="button" class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button name="button" class="btn dropdown-toggle" type="button" data-toggle="dropdown">
         { opts.title || 'Menu' }
     </button>
     <bs-dropdown-menu items="{ opts.items }">
@@ -35,8 +35,7 @@
  *              item.disabled:
  *              item.link:
  *              item.target:
- *              item.onpushed:
- * @param bool pill
+ *              item.onpush:
  */
 <bs-dropdown-menu class="{ classes }">
     <yield/>
@@ -96,7 +95,7 @@
                 el.classList.add('btn-' + item['button-type'])
             }
             el.setAttribute('type', item.button)
-            el.addEventListener('click', opts.onpushed)
+            el.addEventListener('click', opts.onpush)
             el.appendChild(document.createTextNode(item.title || '(No text)'))
             return el
         }

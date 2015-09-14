@@ -3,7 +3,7 @@
  *
  * @param string type - {fixed | fluid}
  */
-riot.tag('bs-grid', '<yield></yield>', 'class="{ classes }"', function(opts) {
+riot.tag('bs-grid', '<yield></yield>', 'bs-grid, [riot-tag="bs-grid"]{ display: block; }', 'class="{ classes }"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -26,7 +26,7 @@ riot.tag('bs-grid', '<yield></yield>', 'class="{ classes }"', function(opts) {
  * bs-grid-row
  *
  */
-riot.tag('bs-grid-row', '<yield></yield>', 'class="{ classes }"', function(opts) {
+riot.tag('bs-grid-row', '<yield></yield>', 'bs-grid-row, [riot-tag="bs-grid-row"]{ display: block; }', 'class="{ classes }"', function(opts) {
         this.mixin('scope')
 
         var classes = [
