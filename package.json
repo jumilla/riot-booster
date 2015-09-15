@@ -1,6 +1,6 @@
 {
   "name": "riot-booster",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Twitter Bootstrap 4 on Riot 2.2",
   "keywords": [
     "css",
@@ -17,6 +17,9 @@
   "main": "./dist/js/npm",
   "files": [
     "components",
+    "dist",
+    "styles",
+    "scripts",
     "LICENSE.txt"
   ],
   "scripts": {
