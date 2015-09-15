@@ -57,23 +57,26 @@ riot.tag('bs-breadcrumb', '<ol class="{ classes }"> <li each="{ opts.items }" cl
 /**
  * bs-button
  *
- * @param string type - {primary | secondary | success | warning | danger | link}
+ * @param string type - {default | primary | secondary | success | warning | danger | link}
  * @param string size - {large | medium | small}
+ * @param string behavior - {button | submit | reset}
  * @param bool outline - default is false.
  * @param bool active - default is false.
  * @param function onpush
  */
-riot.tag('bs-button', '<yield></yield>', 'type="button" class="{ classes }" __disabled="{ opts.disabled }" onclick="{ opts.onpush }"', function(opts) {
+riot.tag('bs-button', '<yield></yield>', 'class="{ classes }" __disabled="{ opts.disabled }" onclick="{ opts.onpush }" role="button"', function(opts) {
         this.mixin('scope')
 
         var classes = [
             'btn',
-            typeClass(opts.type || 'primary', opts.outline),
+            (opts.type || 'secondary') !== 'default' ? typeClass(opts.type || 'secondary', opts.outline) : '',
             sizeClass(opts.size || 'medium'),
             opts.active ? 'active' : '',
             opts.class || '',
         ]
         this.classes = classes.join(' ')
+
+        this.root.type = opts.behavior || 'button'
 
         function typeClass(name, outline) {
             return 'btn-' + name + (outline ? '-outline' : '')
@@ -156,8 +159,9 @@ riot.tag('bs-button-toolbar', '<yield></yield>', 'bs-button-toolbar, [riot-tag="
  * @param bool inverse - [Optional]
  * @param string img-src - [Optional]
  * @param string img-alt - [Optional]
+ * @param string img-position - [Optional:top] {top | bottom}
  */
-riot.tag('bs-card', '<img if="{ opts[\'img-src\'] }" class="card-img-top" data-src="{ opts[\'img-src\'] }" alt="{ opts[\'img-alt\'] }"> <yield></yield>', 'bs-card, [riot-tag="bs-card"]{ display: block; }', 'class="{ classes }"', function(opts) {
+riot.tag('bs-card', '<img if="{ opts[\'img-src\'] && imagePosition == \'top\' }" class="card-img-top" data-src="{ opts[\'img-src\'] }" alt="{ opts[\'img-alt\'] }"> <yield></yield> <img if="{ opts[\'img-src\'] && imagePosition == \'bottom\' }" class="card-img-bottom" data-src="{ opts[\'img-src\'] }" alt="{ opts[\'img-alt\'] }">', 'bs-card, [riot-tag="bs-card"]{ display: block; }', 'class="{ classes }"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -166,6 +170,10 @@ riot.tag('bs-card', '<img if="{ opts[\'img-src\'] }" class="card-img-top" data-s
             opts.class || '',
         ]
         this.classes = classes.join(' ')
+
+        this.imagePosition = function() {
+            return opts['img-position'] || 'top'
+        }.bind(this);
     
 });
 
@@ -589,7 +597,7 @@ riot.tag('bs-label', '<yield></yield>', 'class="{ classes }"', function(opts) {
  *
  * @param array items
  */
-riot.tag('bs-list-group', '<ul class="{ classes }"> <li each="{ opts.items }" class="{ \'list-group\': true, active: this.active, disabled: this.disabled }"> <span if="{ this.label }" class="label label-{ this.\'label-type\' || \'default\' } label-pill pull-right">{ this.label }</span> { this.title } </li> </ul>', function(opts) {
+riot.tag('bs-list-group', '<ul if="{ opts.items }" class="{ classes }"> <li each="{ opts.items }" class="{ \'list-group\': true, active: this.active, disabled: this.disabled }"> <span if="{ this.label }" class="label label-{ this.\'label-type\' || \'default\' } label-pill pull-right">{ this.label }</span> { this.title } </li> </ul> <yield if="{ !opts.items }"></yield>', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -610,7 +618,10 @@ riot.tag('bs-media', '<yield></yield>', 'class="media"', function(opts) {
  * bs-modal
  *
  * @param string size - {large | medium | small}
- * @param bool fade -
+ * @param bool fade - [Optional:false]
+ * @param bool|string backdrop - [Optional:true] {true | false | static}
+ * @param bool keyboard - [Optional:true]
+ * @param bool show - [Optional:true]
  */
 riot.tag('bs-modal', '<div name="dialog" class="modal-dialog" role="document"> <div class="modal-content"> <yield></yield> </div> </div>', 'bs-modal, [riot-tag="bs-modal"]{ display: block; }', 'class="{ classes }"', function(opts) {
         this.mixin('scope')
@@ -622,6 +633,13 @@ riot.tag('bs-modal', '<div name="dialog" class="modal-dialog" role="document"> <
             opts.class || '',
         ]
         this.classes = classes.join(' ')
+
+        if (opts.backdrop !== undefined)
+            this.root.setAttribute('data-backdrop', opts.backdrop)
+        if (opts.keyboard !== undefined)
+            this.root.setAttribute('data-keyboard', opts.keyboard)
+        if (opts.show !== undefined)
+            this.root.setAttribute('data-show', opts.show)
 
         var size = sizeClass(opts.size || 'medium')
         if (size) this.dialog.classList.add(size)
@@ -650,6 +668,18 @@ riot.tag('bs-modal', '<div name="dialog" class="modal-dialog" role="document"> <
         this.modal = function(options) {
             $(this.root).modal(options)
         }.bind(this);
+
+        $(this.root).on('loaded.bs.modal', function () {
+            this.trigger('loaded', this)
+        }.bind(this))
+
+        $(this.root).on('shown.bs.modal', function () {
+            this.trigger('shown', this)
+        }.bind(this))
+
+        $(this.root).on('hidden.bs.modal', function () {
+            this.trigger('hidden', this)
+        }.bind(this))
     
 });
 
@@ -684,7 +714,7 @@ riot.tag('bs-modal-footer', '<yield></yield>', 'bs-modal-footer, [riot-tag="bs-m
 /**
  * bs-navbar
  *
- * @param string type
+ * @param string type - {dark | light}
  * @param string placement - {fixed-top | fixed-bottom}
  */
 riot.tag('bs-navbar', '<nav if="{ !opts.collapse }" class="{ classes }"> <yield></yield> </nav> <nav if="{ opts.collapse }" class="{ classes }"> <button type="button" class="navbar-toggler hidden-sm-up" data-toggle="collapse"> &#9776; </button> <div class="collapse navbar-toggleable-xs"> <yield></yield> </div> </nav>', function(opts) {
@@ -705,8 +735,9 @@ riot.tag('bs-navbar', '<nav if="{ !opts.collapse }" class="{ classes }"> <yield>
  * bs-nav
  *
  * @param string type - {list | inline | tabs | pills | pills-stacked}
+ * @param array items
  */
-riot.tag('bs-nav', '<nav if="{ opts.type === \'inline\' }" class="{ classes }"> <yield if="{ opts.items === null }"></yield> <a each="{ opts.items }" class="{nav-link: true, active: this.active, disabled: this.disabled}" href="{ this.link || \'#\' }">{ this.title }</a> </nav> <ul name="list" if="{ opts.type !== \'inline\' }" class="{ classes }"> <yield if="{ opts.items === null }"></yield> <li each="{ opts.items }" class="nav-item"> <a class="{nav-link: true, active: this.active, disabled: this.disabled}" href="{ this.link || \'#\' }">{ this.title }</a> </li> </ul>', function(opts) {
+riot.tag('bs-nav', '<nav if="{ opts.type === \'inline\' && opts.items }" class="{ classes }"> <a each="{ opts.items }" class="{nav-link: true, active: this.active, disabled: this.disabled}" href="{ this.link || \'#\' }">{ this.title }</a> </nav> <nav if="{ opts.type === \'inline\' && !opts.items }" class="{ classes }"> <yield></yield> </nav> <ul if="{ opts.type !== \'inline\' && opts.items }" class="{ classes }"> <li each="{ opts.items }" class="nav-item"> <a class="{nav-link: true, active: this.active, disabled: this.disabled}" href="{ this.link || \'#\' }">{ this.title }</a> </li> </ul> <ul if="{ opts.type !== \'inline\' && !opts.items }" class="{ classes }"> <yield></yield> </ul>', 'bs-nav, [riot-tag="bs-nav"]{ display: block; }', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -729,7 +760,6 @@ riot.tag('bs-nav', '<nav if="{ opts.type === \'inline\' }" class="{ classes }"> 
         }
     
 });
-
 
 riot.tag('bs-table', '<table class="{ classes }"> <yield></yield> </table>', function(opts) {
         this.mixin('scope')

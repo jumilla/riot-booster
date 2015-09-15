@@ -4,10 +4,12 @@
  * @param bool inverse - [Optional]
  * @param string img-src - [Optional]
  * @param string img-alt - [Optional]
+ * @param string img-position - [Optional:top] {top | bottom}
  */
 <bs-card class="{ classes }">
-    <img if="{ opts['img-src'] }" class="card-img-top" data-src="{ opts['img-src'] }" alt="{ opts['img-alt'] }">
+    <img if="{ opts['img-src'] && imagePosition == 'top' }" class="card-img-top" data-src="{ opts['img-src'] }" alt="{ opts['img-alt'] }">
     <yield/>
+    <img if="{ opts['img-src'] && imagePosition == 'bottom' }" class="card-img-bottom" data-src="{ opts['img-src'] }" alt="{ opts['img-alt'] }">
 
     <script>
         this.mixin('scope')
@@ -18,6 +20,10 @@
             opts.class || '',
         ]
         this.classes = classes.join(' ')
+
+        imagePosition() {
+            return opts['img-position'] || 'top'
+        }
     </script>
 
     <style scoped>

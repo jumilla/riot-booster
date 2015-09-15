@@ -1,7 +1,7 @@
 /**
  * bs-navbar
  *
- * @param string type
+ * @param string type - {dark | light}
  * @param string placement - {fixed-top | fixed-bottom}
  */
 <bs-navbar>

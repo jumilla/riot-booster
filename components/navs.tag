@@ -2,17 +2,22 @@
  * bs-nav
  *
  * @param string type - {list | inline | tabs | pills | pills-stacked}
+ * @param array items
  */
 <bs-nav>
-    <nav if="{ opts.type === 'inline' }" class="{ classes }">
-        <yield if="{ opts.items === null }" />
+    <nav if="{ opts.type === 'inline' && opts.items }" class="{ classes }">
         <a each="{ opts.items }" class="{nav-link: true, active: this.active, disabled: this.disabled}" href="{ this.link || '#' }">{ this.title }</a>
     </nav>
-    <ul name="list" if="{ opts.type !== 'inline' }" class="{ classes }">
-        <yield if="{ opts.items === null }" />
+    <nav if="{ opts.type === 'inline' && !opts.items }" class="{ classes }">
+        <yield/>
+    </nav>
+    <ul if="{ opts.type !== 'inline' && opts.items }" class="{ classes }">
         <li each="{ opts.items }" class="nav-item">
             <a class="{nav-link: true, active: this.active, disabled: this.disabled}" href="{ this.link || '#' }">{ this.title }</a>
         </li>
+    </ul>
+    <ul if="{ opts.type !== 'inline' && !opts.items }" class="{ classes }">
+        <yield/>
     </ul>
 
     <script>
@@ -38,5 +43,10 @@
             return types[name]
         }
     </script>
-</bs-nav>
 
+    <style scoped>
+        :scope {
+            display: block;
+        }
+    </style>
+</bs-nav>

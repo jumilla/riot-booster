@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Riot Booster Demo</title>
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+	<script src="components/alerts.tag" type="riot/tag"></script>
+	<script src="components/buttons.tag" type="riot/tag"></script>
+	<script src="components/card.tag" type="riot/tag"></script>
+	<script src="components/carousel.tag" type="riot/tag"></script>
+	<script src="components/dropdown.tag" type="riot/tag"></script>
+	<script src="components/form.tag" type="riot/tag"></script>
+	<script src="components/grid.tag" type="riot/tag"></script>
+	<script src="components/jumbotron.tag" type="riot/tag"></script>
+	<script src="components/label.tag" type="riot/tag"></script>
+	<script src="components/list-group.tag" type="riot/tag"></script>
+	<script src="components/media.tag" type="riot/tag"></script>
+	<script src="components/modal.tag" type="riot/tag"></script>
+	<script src="components/navs.tag" type="riot/tag"></script>
+	<script src="components/navbar.tag" type="riot/tag"></script>
+	<script src="components/table.tag" type="riot/tag"></script>
+	<script src="components/tooltip.tag" type="riot/tag"></script>
+	<script src="scripts/riot.min.js"></script>
+	<script src="mixins/scope.js"></script>
+	<script src="scripts/jquery.min.js"></script>
+	<script src="scripts/bootstrap.min.js"></script>
+</head>
+<body>
+	<demo>
+	</demo>
+
+	<div role="group" class="btn-group" aria-label="" style="display: none">
+		<button type="button" class="btn btn-primary ">おはなし</button>
+		<button type="button" class="btn btn-danger ">おはなし</button>
+	</div>
+
+	<script type="riot/tag">
+		<demo>
+			<bs-navbar>
+				<button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
+					&#9776;
+				</button>
+				<div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+					<a class="navbar-brand" href="#">Responsive navbar</a>
+					<ul class="nav navbar-nav">
+						<li class="nav-item active">
+							<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Features</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Pricing</a>
+					 	</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">About</a>
+						</li>
+					</ul>
+				</div>
+  			</bs-navbar>
+			<bs-grid>
+			<bs-alert type="success" closebox="true" class="aa">
+				いぇー
+			</bs-alert>
+			<bs-card inverse="true" class="ccdd">
+				<bs-card-header class="pull-right"></bs-card-header>
+			</bs-card>
+			<bs-dropdown title="ほげ" items={ navItems } button-type="primary">
+
+			</bs-dropdown>
+			<bs-jumbotron type="fixed">
+				<h1 class="display-3">Hello, world!</h1>
+				<p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+				<hr class="m-y-md">
+				<p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+				<p class="lead">
+					<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+				</p>
+  			</bs-jumbotron>
+
+			<bs-grid-row>
+				<bs-grid-col size="md-3">
+					<bs-label>v1.0</bs-label>
+					<bs-label type="primary" data-toggle="tooltip" title="hoge">v1.0</bs-label>
+					<bs-label type="success" pill="true">v1.0</bs-label>
+				</bs-grid-col>
+
+				<bs-grid-col size="md-3">
+					<bs-button data-toggle="tooltip" title="hoge">押して</bs-button>
+					<bs-button type="warning" outline="true">押して</bs-button>
+					<bs-button type="danger" size="large" onpushed={hoge}>押しなさい！</bs-button>
+					<bs-button active="true">押して</bs-button>
+					<bs-button disabled="true">押せない</bs-button>
+				</bs-grid-col>
+
+				<bs-grid-col size="md-3">
+					<bs-nav type="inline" items={ navItems }>
+					</bs-nav>
+				</bs-grid-col>
+
+				<bs-grid-col size="md-3">
+					<bs-nav items={ navItems }>
+					</bs-nav>
+				</bs-grid-col>
+
+				<bs-grid-col size="md-3">
+					<bs-nav type="tabs" items={ navItems }>
+					</bs-nav>
+				</bs-grid-col>
+
+				<bs-grid-col size="md-3">
+					<bs-nav type="pills" items={ navItems }>
+					</bs-nav>
+				</bs-grid-col>
+
+				<bs-grid-col size="md-3">
+					<bs-nav type="pills-stacked" items={ navItems }>
+					</bs-nav>
+				</bs-grid-col>
+			</bs-grid-row>
+
+			<bs-grid-row>
+				<bs-button-toolbar>
+					<bs-button-group size="small">
+						<button riot-tag="bs-button" data-toggle="tooltip" title="hoge">おはなし</button>
+						<button riot-tag="bs-button" type="danger">おはなし</button>
+					</bs-button-group>
+				<bs-button-toolbar>
+
+				<bs-button-group>
+					<button riot-tag="bs-button">おはなし</button>
+					<button riot-tag="bs-button" type="danger">おはなし</button>
+				</bs-button-group>
+			</bs-grid-row>
+			</bs-grid>
+		</demo>
+
+		var navItems = [
+			{ title: 'Google', link: 'http://google.com', active: true },
+			{ title: 'Google', link: 'http://google.com' },
+			{ title: 'Google', link: 'http://google.com', disabled: true },
+		]
+
+		function hoge() {
+			alert('hoge')
+		}
+	</script>
+
+	<script>
+		riot.mount('*')
+	</script>
+</body>
+</html>

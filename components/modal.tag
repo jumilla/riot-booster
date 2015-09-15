@@ -2,7 +2,10 @@
  * bs-modal
  *
  * @param string size - {large | medium | small}
- * @param bool fade -
+ * @param bool fade - [Optional:false]
+ * @param bool|string backdrop - [Optional:true] {true | false | static}
+ * @param bool keyboard - [Optional:true]
+ * @param bool show - [Optional:true]
  */
 <bs-modal class="{ classes }">
     <div name="dialog" class="modal-dialog" role="document">
@@ -21,6 +24,13 @@
             opts.class || '',
         ]
         this.classes = classes.join(' ')
+
+        if (opts.backdrop !== undefined)
+            this.root.setAttribute('data-backdrop', opts.backdrop)
+        if (opts.keyboard !== undefined)
+            this.root.setAttribute('data-keyboard', opts.keyboard)
+        if (opts.show !== undefined)
+            this.root.setAttribute('data-show', opts.show)
 
         var size = sizeClass(opts.size || 'medium')
         if (size) this.dialog.classList.add(size)
@@ -49,6 +59,18 @@
         modal(options) {
             $(this.root).modal(options)
         }
+
+        $(this.root).on('loaded.bs.modal', function () {
+            this.trigger('loaded', this)
+        }.bind(this))
+
+        $(this.root).on('shown.bs.modal', function () {
+            this.trigger('shown', this)
+        }.bind(this))
+
+        $(this.root).on('hidden.bs.modal', function () {
+            this.trigger('hidden', this)
+        }.bind(this))
     </script>
 
     <style scoped>

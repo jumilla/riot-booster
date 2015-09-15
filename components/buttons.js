@@ -1,23 +1,26 @@
 /**
  * bs-button
  *
- * @param string type - {primary | secondary | success | warning | danger | link}
+ * @param string type - {default | primary | secondary | success | warning | danger | link}
  * @param string size - {large | medium | small}
+ * @param string behavior - {button | submit | reset}
  * @param bool outline - default is false.
  * @param bool active - default is false.
  * @param function onpush
  */
-riot.tag('bs-button', '<yield></yield>', 'type="button" class="{ classes }" __disabled="{ opts.disabled }" onclick="{ opts.onpush }"', function(opts) {
+riot.tag('bs-button', '<yield></yield>', 'class="{ classes }" __disabled="{ opts.disabled }" onclick="{ opts.onpush }" role="button"', function(opts) {
         this.mixin('scope')
 
         var classes = [
             'btn',
-            typeClass(opts.type || 'primary', opts.outline),
+            (opts.type || 'secondary') !== 'default' ? typeClass(opts.type || 'secondary', opts.outline) : '',
             sizeClass(opts.size || 'medium'),
             opts.active ? 'active' : '',
             opts.class || '',
         ]
         this.classes = classes.join(' ')
+
+        this.root.type = opts.behavior || 'button'
 
         function typeClass(name, outline) {
             return 'btn-' + name + (outline ? '-outline' : '')
