@@ -74,7 +74,7 @@
  * bs-input
  */
 <bs-input>
-	<input type="{ opts.type }" class="{ classes }" name="{ opts.name }" value="{ opts.value }">
+	<input type="{ opts.type }" class="{ classes }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }">
 
 	<script>
 		var classes = [
@@ -102,7 +102,7 @@
 /**
  * bs-input-textarea
  */
-<bs-input-text>
+<bs-input-textarea>
 	<label for="{ opts.id }">{ opts.label }<yield/></label>
     <textarea class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }" row="{ opts.row }" col="{ opts.col }">{ opts.value }</textarea>
 
@@ -112,7 +112,7 @@
 		]
 		this.classes = classes.join(' ')
 	</script>
-</bs-input-text>
+</bs-input-textarea>
 
 /**
  * bs-input-file

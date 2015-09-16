@@ -413,7 +413,7 @@ riot.tag('bs-input-static', '<p class="{ classes }">{ opts.value }</p>', functio
 /**
  * bs-input
  */
-riot.tag('bs-input', '<input type="{ opts.type }" class="{ classes }" name="{ opts.name }" value="{ opts.value }">', function(opts) {
+riot.tag('bs-input', '<input type="{ opts.type }" class="{ classes }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }">', function(opts) {
 		var classes = [
 			'form-control',
 		]
@@ -424,7 +424,18 @@ riot.tag('bs-input', '<input type="{ opts.type }" class="{ classes }" name="{ op
 /**
  * bs-input-text
  */
-riot.tag('bs-input-text', '<label for="{ opts.id }">{ opts.label }<yield></yield></label> <input type="{ opts.type || \'text\' }" class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }"> </bs-input-text> /** * bs-input-textarea */ <bs-input-text> <label for="{ opts.id }">{ opts.label }<yield></yield></label> <textarea class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }" row="{ opts.row }" col="{ opts.col }">{ opts.value }</textarea>', function(opts) {
+riot.tag('bs-input-text', '<label for="{ opts.id }">{ opts.label }<yield></yield></label> <input type="{ opts.type || \'text\' }" class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }">', function(opts) {
+		var classes = [
+			'form-control',
+		]
+		this.classes = classes.join(' ')
+	
+});
+
+/**
+ * bs-input-textarea
+ */
+riot.tag('bs-input-textarea', '<label for="{ opts.id }">{ opts.label }<yield></yield></label> <textarea class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }" row="{ opts.row }" col="{ opts.col }">{ opts.value }</textarea>', function(opts) {
 		var classes = [
 			'form-control',
 		]
@@ -737,7 +748,7 @@ riot.tag('bs-navbar', '<nav if="{ !opts.collapse }" class="{ classes }"> <yield>
  * @param string type - {list | inline | tabs | pills | pills-stacked}
  * @param array items
  */
-riot.tag('bs-nav', '<nav if="{ opts.type === \'inline\' && opts.items }" class="{ classes }"> <a each="{ opts.items }" class="{nav-link: true, active: this.active, disabled: this.disabled}" href="{ this.link || \'#\' }">{ this.title }</a> </nav> <nav if="{ opts.type === \'inline\' && !opts.items }" class="{ classes }"> <yield></yield> </nav> <ul if="{ opts.type !== \'inline\' && opts.items }" class="{ classes }"> <li each="{ opts.items }" class="nav-item"> <a class="{nav-link: true, active: this.active, disabled: this.disabled}" href="{ this.link || \'#\' }">{ this.title }</a> </li> </ul> <ul if="{ opts.type !== \'inline\' && !opts.items }" class="{ classes }"> <yield></yield> </ul>', 'bs-nav, [riot-tag="bs-nav"]{ display: block; }', function(opts) {
+riot.tag('bs-nav', '<nav if="{ opts.type === \'inline\' && opts.items }" class="{ classes }"> <a each="{ opts.items }" class="{nav-link: true, active: this.active, disabled: this.disabled}" href="{ this.link || \'#\' }" onclick="{ this.onclick }">{ this.title }</a> </nav> <nav if="{ opts.type === \'inline\' && !opts.items }" class="{ classes }"> <yield></yield> </nav> <ul if="{ opts.type !== \'inline\' && opts.items }" class="{ classes }"> <li each="{ opts.items }" class="nav-item"> <a class="{nav-link: true, active: this.active, disabled: this.disabled}" href="{ this.link || \'#\' }" onclick="{ this.onclick }">{ this.title }</a> </li> </ul> <ul if="{ opts.type !== \'inline\' && !opts.items }" class="{ classes }"> <yield></yield> </ul>', 'bs-nav, [riot-tag="bs-nav"]{ display: block; }', function(opts) {
         this.mixin('scope')
 
         var classes = [

@@ -6,14 +6,14 @@
  */
 <bs-nav>
     <nav if="{ opts.type === 'inline' && opts.items }" class="{ classes }">
-        <a each="{ opts.items }" class="{nav-link: true, active: this.active, disabled: this.disabled}" href="{ this.link || '#' }">{ this.title }</a>
+        <a each="{ opts.items }" class="{nav-link: true, active: this.active, disabled: this.disabled}" href="{ this.link || '#' }" onclick="{ this.onclick }">{ this.title }</a>
     </nav>
     <nav if="{ opts.type === 'inline' && !opts.items }" class="{ classes }">
         <yield/>
     </nav>
     <ul if="{ opts.type !== 'inline' && opts.items }" class="{ classes }">
         <li each="{ opts.items }" class="nav-item">
-            <a class="{nav-link: true, active: this.active, disabled: this.disabled}" href="{ this.link || '#' }">{ this.title }</a>
+            <a class="{nav-link: true, active: this.active, disabled: this.disabled}" href="{ this.link || '#' }" onclick="{ this.onclick }">{ this.title }</a>
         </li>
     </ul>
     <ul if="{ opts.type !== 'inline' && !opts.items }" class="{ classes }">

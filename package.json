@@ -14,12 +14,13 @@
   ],
   "author": "Fumio Furukawa",
   "license": "MIT",
-  "main": "./dist/js/npm",
+  "main": "./dist/riot-booster.min.js",
   "files": [
     "components",
     "dist",
     "styles",
     "scripts",
+    "gulpfile.js",
     "LICENSE.txt"
   ],
   "scripts": {
@@ -37,6 +38,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-riot": "^0.3.0",
     "gulp-uglify": "^1.4.1",
-    "riot": "^2.2.4"
+    "riot": "^2.2.4",
+    "run-sequence": "^1.1.2"
   }
 }

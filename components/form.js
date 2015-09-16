@@ -65,7 +65,7 @@ riot.tag('bs-input-static', '<p class="{ classes }">{ opts.value }</p>', functio
 /**
  * bs-input
  */
-riot.tag('bs-input', '<input type="{ opts.type }" class="{ classes }" name="{ opts.name }" value="{ opts.value }">', function(opts) {
+riot.tag('bs-input', '<input type="{ opts.type }" class="{ classes }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }">', function(opts) {
 		var classes = [
 			'form-control',
 		]
@@ -76,7 +76,18 @@ riot.tag('bs-input', '<input type="{ opts.type }" class="{ classes }" name="{ op
 /**
  * bs-input-text
  */
-riot.tag('bs-input-text', '<label for="{ opts.id }">{ opts.label }<yield></yield></label> <input type="{ opts.type || \'text\' }" class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }"> </bs-input-text> /** * bs-input-textarea */ <bs-input-text> <label for="{ opts.id }">{ opts.label }<yield></yield></label> <textarea class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }" row="{ opts.row }" col="{ opts.col }">{ opts.value }</textarea>', function(opts) {
+riot.tag('bs-input-text', '<label for="{ opts.id }">{ opts.label }<yield></yield></label> <input type="{ opts.type || \'text\' }" class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }">', function(opts) {
+		var classes = [
+			'form-control',
+		]
+		this.classes = classes.join(' ')
+	
+});
+
+/**
+ * bs-input-textarea
+ */
+riot.tag('bs-input-textarea', '<label for="{ opts.id }">{ opts.label }<yield></yield></label> <textarea class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }" row="{ opts.row }" col="{ opts.col }">{ opts.value }</textarea>', function(opts) {
 		var classes = [
 			'form-control',
 		]
