@@ -1,6 +1,6 @@
 {
   "name": "riot-booster",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Twitter Bootstrap 4 on Riot 2.2",
   "keywords": [
     "css",
@@ -30,8 +30,6 @@
   "dependencies": {
     "riot": "^2.2.4"
   },
-  "devDependencies": {
-  },
   "main": [
     "dist/riot-booster.min.js"
   ],
@@ -39,7 +37,9 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "lib",
+    "components",
+    "documents",
+    "mixins",
     "gulpfile.js",
     "package.json"
   ]
