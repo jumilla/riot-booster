@@ -28,7 +28,7 @@
     "url": "https://github.com/jumilla/riot-booster/issues"
   },
   "dependencies": {
-    "riot": "^2.2.4",
+    "riot": "^2.2.4"
   },
   "devDependencies": {
   },
