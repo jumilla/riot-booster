@@ -32,9 +32,9 @@
   },
   "devDependencies": {
   },
-  "main": {
+  "main": [
     "dist/riot-booster.min.js"
-  },
+  ],
   "ignore": [
     "**/.*",
     "node_modules",
