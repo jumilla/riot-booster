@@ -23,6 +23,22 @@
         this.classes = classes.join(' ')
 
         this.button.classList.add('btn-' + (opts['button-type'] || 'secondary'))
+
+        $(this.root).on('show.bs.dropdown', function () {
+            this.trigger('show', this)
+        }.bind(this))
+
+        $(this.root).on('shown.bs.dropdown', function () {
+            this.trigger('shown', this)
+        }.bind(this))
+
+        $(this.root).on('hide.bs.dropdown', function () {
+            this.trigger('hide', this)
+        }.bind(this))
+
+        $(this.root).on('hidden.bs.dropdown', function () {
+            this.trigger('hidden', this)
+        }.bind(this))
     </script>
 </bs-dropdown>
 

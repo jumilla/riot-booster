@@ -1,3 +1,4 @@
+
 riot.mixin('scope', {
     init: function () {
         if (this.parent)

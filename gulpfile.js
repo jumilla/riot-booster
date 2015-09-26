@@ -20,7 +20,7 @@ gulp.task('build-riot', function() {
 })
 
 gulp.task('build-js', function() {
-	var files = ['./components/*.js', 'mixins/*.js']
+	var files = ['./components/**/*.js', 'libs/**/*.js']
 	return gulp.src(files)
 		.pipe(concat('riot-booster.js'))
 		.pipe(gulp.dest('./dist'))
@@ -32,4 +32,3 @@ gulp.task('build-minify', function() {
 		.pipe(rename('riot-booster.min.js'))
 		.pipe(gulp.dest('./dist'))
 })
-

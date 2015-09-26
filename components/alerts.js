@@ -5,7 +5,7 @@
  * @param bool closebox - [Optional]
  * @param function onclose
  */
-riot.tag('bs-alert', '<yield></yield> <bs-alert-closebox if="{ opts.closebox || false }"></bs-alert-closebox>', 'bs-alert, [riot-tag="bs-alert"]{ display: block; }', 'role="alert" class="{ classes }"', function(opts) {
+riot.tag('bs-alert', '<bs-alert-closebox if="{ opts.closebox || false }"></bs-alert-closebox> <yield></yield>', 'bs-alert, [riot-tag="bs-alert"]{ display: block; }', 'role="alert" class="{ classes }"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -16,7 +16,6 @@ riot.tag('bs-alert', '<yield></yield> <bs-alert-closebox if="{ opts.closebox || 
         this.classes = classes.join(' ')
 
         this.show = function() {
-
         }.bind(this);
 
         this.close = function() {

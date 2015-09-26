@@ -57,8 +57,16 @@ riot.tag('bs-modal', '<div name="dialog" class="modal-dialog" role="document"> <
             this.trigger('loaded', this)
         }.bind(this))
 
+        $(this.root).on('show.bs.modal', function () {
+            this.trigger('show', this)
+        }.bind(this))
+
         $(this.root).on('shown.bs.modal', function () {
             this.trigger('shown', this)
+        }.bind(this))
+
+        $(this.root).on('hide.bs.modal', function () {
+            this.trigger('hide', this)
         }.bind(this))
 
         $(this.root).on('hidden.bs.modal', function () {

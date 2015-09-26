@@ -6,8 +6,8 @@
  * @param function onclose
  */
 <bs-alert role="alert" class="{ classes }">
-    <yield/>
     <bs-alert-closebox if="{ opts.closebox || false }"/>
+    <yield/>
 
     <script>
         this.mixin('scope')
@@ -20,7 +20,6 @@
         this.classes = classes.join(' ')
 
         show() {
-
         }
 
         close() {

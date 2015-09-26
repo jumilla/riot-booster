@@ -3,7 +3,6 @@
  *
  * @param string type - {default | primary | secondary | success | warning | danger | link}
  * @param string size - {large | medium | small}
- * @param string behavior - {button | submit | reset}
  * @param bool outline - default is false.
  * @param bool active - default is false.
  * @param function onpush
@@ -22,8 +21,6 @@
             opts.class || '',
         ]
         this.classes = classes.join(' ')
-
-        this.root.type = opts.behavior || 'button'
 
         function typeClass(name, outline) {
             return 'btn-' + name + (outline ? '-outline' : '')

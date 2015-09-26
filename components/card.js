@@ -6,7 +6,7 @@
  * @param string img-alt - [Optional]
  * @param string img-position - [Optional:top] {top | bottom}
  */
-riot.tag('bs-card', '<img if="{ opts[\'img-src\'] && imagePosition == \'top\' }" class="card-img-top" data-src="{ opts[\'img-src\'] }" alt="{ opts[\'img-alt\'] }"> <yield></yield> <img if="{ opts[\'img-src\'] && imagePosition == \'bottom\' }" class="card-img-bottom" data-src="{ opts[\'img-src\'] }" alt="{ opts[\'img-alt\'] }">', 'bs-card, [riot-tag="bs-card"]{ display: block; }', 'class="{ classes }"', function(opts) {
+riot.tag('bs-card', '<img if="{ opts[\'img-src\'] && imagePosition() == \'top\' }" class="card-img-top" data-src="{ opts[\'img-src\'] }" alt="{ opts[\'img-alt\'] }"> <yield></yield> <img if="{ opts[\'img-src\'] && imagePosition() == \'bottom\' }" class="card-img-bottom" data-src="{ opts[\'img-src\'] }" alt="{ opts[\'img-alt\'] }">', 'bs-card, [riot-tag="bs-card"]{ display: block; }', 'class="{ classes }"', function(opts) {
         this.mixin('scope')
 
         var classes = [
