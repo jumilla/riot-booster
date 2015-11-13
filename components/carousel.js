@@ -1,4 +1,2 @@
-riot.tag('bs-carousel', '', function(opts) {
-
-
+riot.tag2('bs-carousel', '', '', '', function(opts) {
 });

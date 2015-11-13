@@ -3,7 +3,7 @@
  *
  * @param string type - {fixed | fluid}
  */
-riot.tag('bs-grid', '<yield></yield>', 'bs-grid, [riot-tag="bs-grid"]{ display: block; }', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-grid', '<yield></yield>', 'bs-grid,[riot-tag="bs-grid"] { display: block; }', 'class="{classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -19,14 +19,13 @@ riot.tag('bs-grid', '<yield></yield>', 'bs-grid, [riot-tag="bs-grid"]{ display: 
             }
             return types[name]
         }
-    
-});
+}, '{ }');
 
 /**
  * bs-grid-row
  *
  */
-riot.tag('bs-grid-row', '<yield></yield>', 'bs-grid-row, [riot-tag="bs-grid-row"]{ display: block; }', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-grid-row', '<yield></yield>', 'bs-grid-row,[riot-tag="bs-grid-row"] { display: block; }', 'class="{classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -34,8 +33,7 @@ riot.tag('bs-grid-row', '<yield></yield>', 'bs-grid-row, [riot-tag="bs-grid-row"
             opts.class || '',
         ]
         this.classes = classes.join(' ')
-    
-});
+}, '{ }');
 
 /**
  * bs-grid-col
@@ -44,7 +42,7 @@ riot.tag('bs-grid-row', '<yield></yield>', 'bs-grid-row, [riot-tag="bs-grid-row"
  * @param string size -  [Required] {xl-* | lg-* | md-* | sm-* | xs-*}
  * @param string offset - [Optional] {xl-* | lg-* | md-* | sm-* | xs-*}
  */
-riot.tag('bs-grid-col', '<yield></yield>', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-grid-col', '<yield></yield>', '', 'class="{classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -69,5 +67,4 @@ riot.tag('bs-grid-col', '<yield></yield>', 'class="{ classes }"', function(opts)
             var p = name.split('-')
             return 'col-' + p[0] + '-offset-' + p[1]
         }
-    
-});
+}, '{ }');

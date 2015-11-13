@@ -10,7 +10,7 @@
  * @event bindings.load()
  * @event bindings.save()
  */
-riot.tag('bs-form', '<form name="form" class="{ classes }"> <yield></yield> </form>', function(opts) {
+riot.tag2('bs-form', '<form name="form" class="{classes}"> <yield></yield> </form>', '', '', function(opts) {
         this.mixin('scope')
 
 		var classes = [
@@ -21,7 +21,7 @@ riot.tag('bs-form', '<form name="form" class="{ classes }"> <yield></yield> </fo
         this.load = function() {
             this.resetStatus()
             this.loadBindings()
-        }.bind(this);
+        }.bind(this)
 
         this.resetStatus = function() {
             var classes = ['has-success', 'has-warning', 'has-error']
@@ -37,7 +37,7 @@ riot.tag('bs-form', '<form name="form" class="{ classes }"> <yield></yield> </fo
                     node.classList.remove(klass)
                 }
             }
-        }.bind(this);
+        }.bind(this)
 
 		this.loadBindings = function() {
 			if (!opts.bindings) return
@@ -52,11 +52,11 @@ riot.tag('bs-form', '<form name="form" class="{ classes }"> <yield></yield> </fo
 					node.value = opts.bindings[node.name]
 				}
 			}
-		}.bind(this);
+		}.bind(this)
 
         this.save = function() {
             this.saveBindings()
-        }.bind(this);
+        }.bind(this)
 
 		this.saveBindings = function() {
 			if (!opts.bindings) return
@@ -71,7 +71,7 @@ riot.tag('bs-form', '<form name="form" class="{ classes }"> <yield></yield> </fo
 			}
 
 			opts.bindings.trigger('save', opts.bindings)
-		}.bind(this);
+		}.bind(this)
 
         this.applyDiagnoses = function() {
             if (!opts.diagnoses) return
@@ -91,11 +91,12 @@ riot.tag('bs-form', '<form name="form" class="{ classes }"> <yield></yield> </fo
                     if (!el) {
                         el = this.form[field]
                     }
-
-                    el.classList.add(klass)
+                    if (el) {
+                        el.classList.add(klass)
+                    }
                 }
             }
-        }.bind(this);
+        }.bind(this)
 
 		this.on('mount', function () {
 			this.load()
@@ -110,24 +111,29 @@ riot.tag('bs-form', '<form name="form" class="{ classes }"> <yield></yield> </fo
         this.on('updated', function () {
             this.applyDiagnoses()
         }.bind(this))
-	
-});
+}, '{ }');
 
 /**
  * bs-form-field
  *
  * @param string helptext
  */
-riot.tag('bs-form-field', '<fieldset class="{ classes }"> <yield></yield> <p if="{ opts.helptext }" class="help-block">{ opts.helptext }</p> </fieldset>', function(opts) {
+riot.tag2('bs-form-field', '<yield></yield> <p each="{helptext in helptexts}" class="help-block">{helptext}</p>', 'bs-form-field,[riot-tag="bs-form-field"] { display: block; }', 'class="{classes}"', function(opts) {
 		this.mixin('scope')
 
-		var classes = [
-			'form-group',
-            opts.status == 'error' ? 'has-error' : '',
-		]
-		this.classes = classes.join(' ')
-	
-});
+        this.on('update', function () {
+            this.classes = classes()
+            this.helptexts = typeof opts.helptext === 'array' ? opts.helptext : [opts.helptext]
+        })
+
+        function classes() {
+    		var classes = [
+    			'form-group',
+                opts.status == 'error' ? 'has-error' : '',
+    		]
+    		return classes.join(' ')
+        }
+}, '{ }');
 
 /**
  * bs-form-button
@@ -140,7 +146,7 @@ riot.tag('bs-form-field', '<fieldset class="{ classes }"> <yield></yield> <p if=
  * @param bool active - default is false.
  * @param function onpush
  */
-riot.tag('bs-form-button', '<button class="{ classes() }" type="{ opts.behavior || \'button\' }" __disabled="{ opts.disable }" onclick="{ opts.onpush }" role="button"> <yield></yield> </button>', function(opts) {
+riot.tag2('bs-form-button', '<button class="{classes()}" type="{opts.behavior || \'button\'}" __disabled="{opts.disable}" onclick="{opts.onpush}" role="button"> <yield></yield> </button>', '', '', function(opts) {
         this.mixin('scope')
 
         this.classes = function() {
@@ -169,97 +175,88 @@ riot.tag('bs-form-button', '<button class="{ classes() }" type="{ opts.behavior 
 
                 return sizes[name]
             }
-        }.bind(this);
-    
-});
+        }.bind(this)
+}, '{ }');
 
 /**
  * bs-form-static
  */
-riot.tag('bs-form-static', '<p class="{ classes }">{ opts.value }</p>', function(opts) {
+riot.tag2('bs-form-static', '<p class="{classes}">{opts.value}</p>', '', '', function(opts) {
 		var classes = [
 			'form-control-static',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-input
  */
-riot.tag('bs-form-input', '<input type="{ opts.type }" class="{ classes }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }">', function(opts) {
+riot.tag2('bs-form-input', '<input type="{opts.type}" class="{classes}" name="{opts.name}" value="{opts.value}" placeholder="{opts.placeholder}">', '', '', function(opts) {
 		var classes = [
 			'form-control',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-text
  */
-riot.tag('bs-form-text', '<label for="{ opts.id }">{ opts.label }<yield></yield></label> <input type="{ opts.type || \'text\' }" class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }">', function(opts) {
+riot.tag2('bs-form-text', '<label if="{opts.label}" for="{opts.id}">{opts.label}<yield></yield></label> <input type="{opts.type || \'text\'}" class="{classes}" id="{opts.id}" name="{opts.name}" value="{opts.value}" placeholder="{opts.placeholder}">', '', '', function(opts) {
 		var classes = [
 			'form-control',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-textarea
  */
-riot.tag('bs-form-textarea', '<label for="{ opts.id }">{ opts.label }<yield></yield></label> <textarea class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }" row="{ opts.row }" col="{ opts.col }">{ opts.value }</textarea>', function(opts) {
+riot.tag2('bs-form-textarea', '<label if="{opts.label}" for="{opts.id}">{opts.label}<yield></yield></label> <textarea class="{classes}" id="{opts.id}" name="{opts.name}" value="{opts.value}" placeholder="{opts.placeholder}" row="{opts.row}" col="{opts.col}">{opts.value}</textarea>', '', '', function(opts) {
 		var classes = [
 			'form-control',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-file
  */
-riot.tag('bs-form-file', '<input type="file" class="{ classes }" name="{ opts.name }" value="{ opts.value }">', function(opts) {
+riot.tag2('bs-form-file', '<input type="file" class="{classes}" name="{opts.name}" value="{opts.value}">', '', '', function(opts) {
 		var classes = [
 			'form-control-file',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-checkbox
  */
-riot.tag('bs-form-checkbox', '<label> <input type="checkbox" class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }"> { opts.label } <yield></yield> </label>', 'class="checkbox"', function(opts) {
+riot.tag2('bs-form-checkbox', '<label> <input type="checkbox" class="{classes}" id="{opts.id}" name="{opts.name}" value="{opts.value}" placeholder="{opts.placeholder}"> {opts.label} <yield></yield> </label>', '', 'class="checkbox"', function(opts) {
 		var classes = [
 			'form-control',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-radio
  */
-riot.tag('bs-form-radio', '<label> <input type="radio" class="{ classes }" name="{ opts.name }" value="{ opts.value }" __checked="{ opts.checked }"> { opts.label } <yield></yield> </label>', 'class="radio"', function(opts) {
+riot.tag2('bs-form-radio', '<label> <input type="radio" class="{classes}" name="{opts.name}" value="{opts.value}" __checked="{opts.checked}"> {opts.label} <yield></yield> </label>', '', 'class="radio"', function(opts) {
 		var classes = [
 			'form-control',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-list-dropdown
  */
-riot.tag('bs-form-list-dropdown', '<label for="{ opts.id }">{ opts.label }</label> <select class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" __checked="{ opts.checked }"> <yield></yield> </select>', function(opts) {
+riot.tag2('bs-form-list-dropdown', '<label if="{opts.label}" for="{opts.id}">{opts.label}</label> <select class="{classes}" id="{opts.id}" name="{opts.name}" value="{opts.value}" __checked="{opts.checked}"> <yield></yield> </select>', '', '', function(opts) {
 		var classes = [
 			'form-control',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-list-box
@@ -267,7 +264,7 @@ riot.tag('bs-form-list-dropdown', '<label for="{ opts.id }">{ opts.label }</labe
  * @param int items - [Required]
  * @param int rows - [Required]
  */
-riot.tag('bs-form-list-box', '<label for="{ opts.id }">{ opts.label }</label> <select class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" __checked="{ opts.checked }"> <yield></yield> </select>', function(opts) {
+riot.tag2('bs-form-list-box', '<label if="{opts.label}" for="{opts.id}">{opts.label}</label> <select class="{classes}" id="{opts.id}" name="{opts.name}" value="{opts.value}" __checked="{opts.checked}"> <yield></yield> </select>', '', '', function(opts) {
 		var classes = [
 			'form-control',
 		]
@@ -286,5 +283,4 @@ riot.tag('bs-form-list-box', '<label for="{ opts.id }">{ opts.label }</label> <s
 				})
 			}
 		}.bind(this))
-	
-});
+}, '{ }');

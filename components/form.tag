@@ -96,8 +96,9 @@
                     if (!el) {
                         el = this.form[field]
                     }
-
-                    el.classList.add(klass)
+                    if (el) {
+                        el.classList.add(klass)
+                    }
                 }
             }
         }
@@ -123,21 +124,32 @@
  *
  * @param string helptext
  */
-<bs-form-field>
-	<fieldset class="{ classes }">
-		<yield/>
-        <p if="{ opts.helptext }" class="help-block">{ opts.helptext }</p>
-	</fieldset>
+<bs-form-field class="{ classes }">
+	<yield/>
+    <p each="{ helptext in helptexts }" class="help-block">{ helptext }</p>
 
 	<script>
 		this.mixin('scope')
 
-		var classes = [
-			'form-group',
-            opts.status == 'error' ? 'has-error' : '',
-		]
-		this.classes = classes.join(' ')
+        this.on('update', function () {
+            this.classes = classes()
+            this.helptexts = typeof opts.helptext === 'array' ? opts.helptext : [opts.helptext]
+        })
+
+        function classes() {
+    		var classes = [
+    			'form-group',
+                opts.status == 'error' ? 'has-error' : '',
+    		]
+    		return classes.join(' ')
+        }
 	</script>
+
+    <style scoped>
+        :scope {
+            display: block;
+        }
+    </style>
 </bs-form-field>
 
 /**
@@ -221,7 +233,7 @@
  * bs-form-text
  */
 <bs-form-text>
-	<label for="{ opts.id }">{ opts.label }<yield/></label>
+	<label if="{ opts.label }" for="{ opts.id }">{ opts.label }<yield/></label>
     <input type="{ opts.type || 'text' }" class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }">
 
 	<script>
@@ -236,7 +248,7 @@
  * bs-form-textarea
  */
 <bs-form-textarea>
-	<label for="{ opts.id }">{ opts.label }<yield/></label>
+	<label if="{ opts.label }" for="{ opts.id }">{ opts.label }<yield/></label>
     <textarea class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }" row="{ opts.row }" col="{ opts.col }">{ opts.value }</textarea>
 
 	<script>
@@ -301,7 +313,7 @@
  * bs-form-list-dropdown
  */
 <bs-form-list-dropdown>
-	<label for="{ opts.id }">{ opts.label }</label>
+	<label if="{ opts.label }" for="{ opts.id }">{ opts.label }</label>
 	<select class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" checked="{ opts.checked }">
 		<yield/>
 	</select>
@@ -321,7 +333,7 @@
  * @param int rows - [Required]
  */
 <bs-form-list-box>
-	<label for="{ opts.id }">{ opts.label }</label>
+	<label if="{ opts.label }" for="{ opts.id }">{ opts.label }</label>
 	<select class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" checked="{ opts.checked }">
 		<yield/>
 	</select>

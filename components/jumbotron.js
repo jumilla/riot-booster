@@ -3,7 +3,7 @@
  *
  * @param string type - {fixed | fluid}
  */
-riot.tag('bs-jumbotron', '<yield></yield>', 'bs-jumbotron, [riot-tag="bs-jumbotron"]{ display: block; }', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-jumbotron', '<yield></yield>', 'bs-jumbotron,[riot-tag="bs-jumbotron"] { display: block; }', 'class="{classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -19,5 +19,4 @@ riot.tag('bs-jumbotron', '<yield></yield>', 'bs-jumbotron, [riot-tag="bs-jumbotr
             }
             return types[name]
         }
-    
-});
+}, '{ }');

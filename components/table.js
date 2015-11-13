@@ -1,4 +1,4 @@
-riot.tag('bs-table', '<table class="{ classes }"> <yield></yield> </table>', function(opts) {
+riot.tag2('bs-table', '<table class="{classes}"> <yield></yield> </table>', '', '', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -6,5 +6,4 @@ riot.tag('bs-table', '<table class="{ classes }"> <yield></yield> </table>', fun
             opts.class || '',
         ]
         this.classes = classes.join(' ')
-    
-});
+}, '{ }');

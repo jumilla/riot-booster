@@ -5,7 +5,7 @@
  * @param string button-type [Optional:'secondary']
  * @param array items [Required]
  */
-riot.tag('bs-dropdown', '<button name="button" class="btn dropdown-toggle" type="button" data-toggle="dropdown"> { opts.title || \'Menu\' } </button> <bs-dropdown-menu items="{ opts.items }"> <yield></yield> </bs-dropdown-menu>', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-dropdown', '<button name="button" class="btn dropdown-toggle" type="button" data-toggle="dropdown"> {opts.title || \'Menu\'} </button> <bs-dropdown-menu items="{opts.items}"> <yield></yield> </bs-dropdown-menu>', '', 'class="{classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -31,8 +31,7 @@ riot.tag('bs-dropdown', '<button name="button" class="btn dropdown-toggle" type=
         $(this.root).on('hidden.bs.dropdown', function () {
             this.trigger('hidden', this)
         }.bind(this))
-    
-});
+}, '{ }');
 
 /**
  * bs-dropdown-menu
@@ -45,7 +44,7 @@ riot.tag('bs-dropdown', '<button name="button" class="btn dropdown-toggle" type=
  *              item.target:
  *              item.onpush:
  */
-riot.tag('bs-dropdown-menu', '<yield></yield>', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-dropdown-menu', '<yield></yield>', '', 'class="{classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -116,5 +115,4 @@ riot.tag('bs-dropdown-menu', '<yield></yield>', 'class="{ classes }"', function(
             el.appendChild(document.createTextNode(item.title || '(No text)'))
             return el
         }
-    
-});
+}, '{ }');

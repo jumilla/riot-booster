@@ -7,7 +7,7 @@
  * @param bool active - default is false.
  * @param function onpush
  */
-riot.tag('bs-button', '<yield></yield>', 'class="{ classes }" __disabled="{ opts.disabled }" onclick="{ opts.onpush }" role="button"', function(opts) {
+riot.tag2('bs-button', '<yield></yield>', '', 'class="{classes}" __disabled="{opts.disabled}" onclick="{opts.onpush}" role="button"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -37,12 +37,11 @@ riot.tag('bs-button', '<yield></yield>', 'class="{ classes }" __disabled="{ opts
         }
 
         this.toggle = function() {
-        }.bind(this);
+        }.bind(this)
 
         this.reset = function() {
-        }.bind(this);
-    
-});
+        }.bind(this)
+}, '{ }');
 
 /**
  * bs-button-group
@@ -51,7 +50,7 @@ riot.tag('bs-button', '<yield></yield>', 'class="{ classes }" __disabled="{ opts
  * @param string label
  * @param bool vertical - default is false.
  */
-riot.tag('bs-button-group', '<yield></yield>', 'bs-button-group, [riot-tag="bs-button-group"]{ display: block; }', 'role="group" class="{ classes }" aria-label="{ opts.label }"', function(opts) {
+riot.tag2('bs-button-group', '<yield></yield>', 'bs-button-group,[riot-tag="bs-button-group"] { display: block; }', 'role="group" class="{classes}" aria-label="{opts.label}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -75,15 +74,14 @@ riot.tag('bs-button-group', '<yield></yield>', 'bs-button-group, [riot-tag="bs-b
 
             return sizes[name]
         }
-    
-});
+}, '{ }');
 
 /**
  * bs-button-toolbar
  *
  * @param string label
  */
-riot.tag('bs-button-toolbar', '<yield></yield>', 'bs-button-toolbar, [riot-tag="bs-button-toolbar"]{ display: block; }', 'role="toolbar" class="{ classes }" aria-label="{ opts.label }"', function(opts) {
+riot.tag2('bs-button-toolbar', '<yield></yield>', 'bs-button-toolbar,[riot-tag="bs-button-toolbar"] { display: block; }', 'role="toolbar" class="{classes}" aria-label="{opts.label}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -91,5 +89,4 @@ riot.tag('bs-button-toolbar', '<yield></yield>', 'bs-button-toolbar, [riot-tag="
             opts.class || '',
         ]
         this.classes = classes.join(' ')
-    
-});
+}, '{ }');

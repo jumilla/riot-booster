@@ -5,7 +5,7 @@
  * @param bool closebox - [Optional]
  * @param function onclose
  */
-riot.tag('bs-alert', '<bs-alert-closebox if="{ opts.closebox || false }"></bs-alert-closebox> <yield></yield>', 'bs-alert, [riot-tag="bs-alert"]{ display: block; }', 'role="alert" class="{ classes }"', function(opts) {
+riot.tag2('bs-alert', '<bs-alert-closebox if="{opts.closebox || false}"></bs-alert-closebox> <yield></yield>', 'bs-alert,[riot-tag="bs-alert"] { display: block; }', 'role="alert" class="{classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -16,10 +16,10 @@ riot.tag('bs-alert', '<bs-alert-closebox if="{ opts.closebox || false }"></bs-al
         this.classes = classes.join(' ')
 
         this.show = function() {
-        }.bind(this);
+        }.bind(this)
 
         this.close = function() {
-        }.bind(this);
+        }.bind(this)
 
         if (opts.onclose) {
             this.on('mount', function () {
@@ -31,11 +31,9 @@ riot.tag('bs-alert', '<bs-alert-closebox if="{ opts.closebox || false }"></bs-al
             this.on('unmount', function () {
             })
         }
-    
-});
+}, '{ }');
 
-riot.tag('bs-alert-closebox', '<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> <span class="sr-only">Close</span> </button>', function(opts) {
-
+riot.tag2('bs-alert-closebox', '<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> <span class="sr-only">Close</span> </button>', '', '', function(opts) {
 });
 
 /**
@@ -43,7 +41,7 @@ riot.tag('bs-alert-closebox', '<button type="button" class="close" data-dismiss=
  *
  * @param array items
  */
-riot.tag('bs-breadcrumb', '<ol class="{ classes }"> <li each="{ opts.items }" class="{ active: this.active }"> <a if="{ !this.active }" href="{ this.link || \'#\' }">{ this.title }</a> { this.active ? this.title : \'\' } </li> </ol>', function(opts) {
+riot.tag2('bs-breadcrumb', '<ol class="{classes}"> <li each="{opts.items}" class="{active: this.active}"> <a if="{!this.active}" href="{this.link || \'#\'}">{this.title}</a> {this.active ? this.title : \'\'} </li> </ol>', '', '', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -51,8 +49,8 @@ riot.tag('bs-breadcrumb', '<ol class="{ classes }"> <li each="{ opts.items }" cl
             opts.class || '',
         ]
         this.classes = classes.join(' ')
-    
-});
+}, '{ }');
+
 /**
  * bs-button
  *
@@ -62,7 +60,7 @@ riot.tag('bs-breadcrumb', '<ol class="{ classes }"> <li each="{ opts.items }" cl
  * @param bool active - default is false.
  * @param function onpush
  */
-riot.tag('bs-button', '<yield></yield>', 'class="{ classes }" __disabled="{ opts.disabled }" onclick="{ opts.onpush }" role="button"', function(opts) {
+riot.tag2('bs-button', '<yield></yield>', '', 'class="{classes}" __disabled="{opts.disabled}" onclick="{opts.onpush}" role="button"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -92,12 +90,11 @@ riot.tag('bs-button', '<yield></yield>', 'class="{ classes }" __disabled="{ opts
         }
 
         this.toggle = function() {
-        }.bind(this);
+        }.bind(this)
 
         this.reset = function() {
-        }.bind(this);
-    
-});
+        }.bind(this)
+}, '{ }');
 
 /**
  * bs-button-group
@@ -106,7 +103,7 @@ riot.tag('bs-button', '<yield></yield>', 'class="{ classes }" __disabled="{ opts
  * @param string label
  * @param bool vertical - default is false.
  */
-riot.tag('bs-button-group', '<yield></yield>', 'bs-button-group, [riot-tag="bs-button-group"]{ display: block; }', 'role="group" class="{ classes }" aria-label="{ opts.label }"', function(opts) {
+riot.tag2('bs-button-group', '<yield></yield>', 'bs-button-group,[riot-tag="bs-button-group"] { display: block; }', 'role="group" class="{classes}" aria-label="{opts.label}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -130,15 +127,14 @@ riot.tag('bs-button-group', '<yield></yield>', 'bs-button-group, [riot-tag="bs-b
 
             return sizes[name]
         }
-    
-});
+}, '{ }');
 
 /**
  * bs-button-toolbar
  *
  * @param string label
  */
-riot.tag('bs-button-toolbar', '<yield></yield>', 'bs-button-toolbar, [riot-tag="bs-button-toolbar"]{ display: block; }', 'role="toolbar" class="{ classes }" aria-label="{ opts.label }"', function(opts) {
+riot.tag2('bs-button-toolbar', '<yield></yield>', 'bs-button-toolbar,[riot-tag="bs-button-toolbar"] { display: block; }', 'role="toolbar" class="{classes}" aria-label="{opts.label}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -146,8 +142,7 @@ riot.tag('bs-button-toolbar', '<yield></yield>', 'bs-button-toolbar, [riot-tag="
             opts.class || '',
         ]
         this.classes = classes.join(' ')
-    
-});
+}, '{ }');
 
 /**
  * bs-card
@@ -157,7 +152,7 @@ riot.tag('bs-button-toolbar', '<yield></yield>', 'bs-button-toolbar, [riot-tag="
  * @param string img-alt - [Optional]
  * @param string img-position - [Optional:top] {top | bottom}
  */
-riot.tag('bs-card', '<img if="{ opts[\'img-src\'] && imagePosition() == \'top\' }" class="card-img-top" data-src="{ opts[\'img-src\'] }" alt="{ opts[\'img-alt\'] }"> <yield></yield> <img if="{ opts[\'img-src\'] && imagePosition() == \'bottom\' }" class="card-img-bottom" data-src="{ opts[\'img-src\'] }" alt="{ opts[\'img-alt\'] }">', 'bs-card, [riot-tag="bs-card"]{ display: block; }', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-card', '<img if="{opts[\'img-src\'] && imagePosition() == \'top\'}" class="card-img-top" data-src="{opts[\'img-src\']}" alt="{opts[\'img-alt\']}"> <yield></yield> <img if="{opts[\'img-src\'] && imagePosition() == \'bottom\'}" class="card-img-bottom" data-src="{opts[\'img-src\']}" alt="{opts[\'img-alt\']}">', 'bs-card,[riot-tag="bs-card"] { display: block; }', 'class="{classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -169,15 +164,14 @@ riot.tag('bs-card', '<img if="{ opts[\'img-src\'] && imagePosition() == \'top\' 
 
         this.imagePosition = function() {
             return opts['img-position'] || 'top'
-        }.bind(this);
-    
-});
+        }.bind(this)
+}, '{ }');
 
 /**
  * bs-card-header
  *
  */
-riot.tag('bs-card-header', '<yield></yield>', 'bs-card-header, [riot-tag="bs-card-header"]{ display: block; }', 'class="{ this.classes }"', function(opts) {
+riot.tag2('bs-card-header', '<yield></yield>', 'bs-card-header,[riot-tag="bs-card-header"] { display: block; }', 'class="{this.classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -185,58 +179,51 @@ riot.tag('bs-card-header', '<yield></yield>', 'bs-card-header, [riot-tag="bs-car
             opts.class || '',
         ]
         this.classes = classes.join(' ')
-    
-});
+}, '{ }');
 
 /**
  * bs-card-block
  *
  */
-riot.tag('bs-card-block', '<yield></yield>', 'bs-card-block, [riot-tag="bs-card-block"]{ display: block; }', 'class="card-block"', function(opts) {
+riot.tag2('bs-card-block', '<yield></yield>', 'bs-card-block,[riot-tag="bs-card-block"] { display: block; }', 'class="card-block"', function(opts) {
         this.mixin('scope')
-    
 });
 
 /**
  * bs-card-footer
  *
  */
-riot.tag('bs-card-footer', '<yield></yield>', 'bs-card-footer, [riot-tag="bs-card-footer"]{ display: block; }', 'class="card-footer"', function(opts) {
+riot.tag2('bs-card-footer', '<yield></yield>', 'bs-card-footer,[riot-tag="bs-card-footer"] { display: block; }', 'class="card-footer"', function(opts) {
         this.mixin('scope')
-    
 });
 
 /**
  * bs-card-group
  *
  */
-riot.tag('bs-card-group', '<yield></yield>', 'bs-card-group, [riot-tag="bs-card-group"]{ display: block; }', 'class="card-group"', function(opts) {
+riot.tag2('bs-card-group', '<yield></yield>', 'bs-card-group,[riot-tag="bs-card-group"] { display: block; }', 'class="card-group"', function(opts) {
         this.mixin('scope')
-    
 });
 
 /**
  * bs-card-deck
  *
  */
-riot.tag('bs-card-deck', '<yield></yield>', 'bs-card-deck, [riot-tag="bs-card-deck"]{ display: block; }', 'class="card-deck"', function(opts) {
+riot.tag2('bs-card-deck', '<yield></yield>', 'bs-card-deck,[riot-tag="bs-card-deck"] { display: block; }', 'class="card-deck"', function(opts) {
         this.mixin('scope')
-    
 });
 
 /**
  * bs-card-columns
  *
  */
-riot.tag('bs-card-columns', '<yield></yield>', 'bs-card-columns, [riot-tag="bs-card-columns"]{ display: block; }', 'class="card-columns"', function(opts) {
+riot.tag2('bs-card-columns', '<yield></yield>', 'bs-card-columns,[riot-tag="bs-card-columns"] { display: block; }', 'class="card-columns"', function(opts) {
         this.mixin('scope')
-    
 });
 
-riot.tag('bs-carousel', '', function(opts) {
-
-
+riot.tag2('bs-carousel', '', '', '', function(opts) {
 });
+
 /**
  * bs-dropdown
  *
@@ -244,7 +231,7 @@ riot.tag('bs-carousel', '', function(opts) {
  * @param string button-type [Optional:'secondary']
  * @param array items [Required]
  */
-riot.tag('bs-dropdown', '<button name="button" class="btn dropdown-toggle" type="button" data-toggle="dropdown"> { opts.title || \'Menu\' } </button> <bs-dropdown-menu items="{ opts.items }"> <yield></yield> </bs-dropdown-menu>', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-dropdown', '<button name="button" class="btn dropdown-toggle" type="button" data-toggle="dropdown"> {opts.title || \'Menu\'} </button> <bs-dropdown-menu items="{opts.items}"> <yield></yield> </bs-dropdown-menu>', '', 'class="{classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -270,8 +257,7 @@ riot.tag('bs-dropdown', '<button name="button" class="btn dropdown-toggle" type=
         $(this.root).on('hidden.bs.dropdown', function () {
             this.trigger('hidden', this)
         }.bind(this))
-    
-});
+}, '{ }');
 
 /**
  * bs-dropdown-menu
@@ -284,7 +270,7 @@ riot.tag('bs-dropdown', '<button name="button" class="btn dropdown-toggle" type=
  *              item.target:
  *              item.onpush:
  */
-riot.tag('bs-dropdown-menu', '<yield></yield>', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-dropdown-menu', '<yield></yield>', '', 'class="{classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -355,8 +341,7 @@ riot.tag('bs-dropdown-menu', '<yield></yield>', 'class="{ classes }"', function(
             el.appendChild(document.createTextNode(item.title || '(No text)'))
             return el
         }
-    
-});
+}, '{ }');
 
 /**
  * bs-form
@@ -370,7 +355,7 @@ riot.tag('bs-dropdown-menu', '<yield></yield>', 'class="{ classes }"', function(
  * @event bindings.load()
  * @event bindings.save()
  */
-riot.tag('bs-form', '<form name="form" class="{ classes }"> <yield></yield> </form>', function(opts) {
+riot.tag2('bs-form', '<form name="form" class="{classes}"> <yield></yield> </form>', '', '', function(opts) {
         this.mixin('scope')
 
 		var classes = [
@@ -381,7 +366,7 @@ riot.tag('bs-form', '<form name="form" class="{ classes }"> <yield></yield> </fo
         this.load = function() {
             this.resetStatus()
             this.loadBindings()
-        }.bind(this);
+        }.bind(this)
 
         this.resetStatus = function() {
             var classes = ['has-success', 'has-warning', 'has-error']
@@ -397,7 +382,7 @@ riot.tag('bs-form', '<form name="form" class="{ classes }"> <yield></yield> </fo
                     node.classList.remove(klass)
                 }
             }
-        }.bind(this);
+        }.bind(this)
 
 		this.loadBindings = function() {
 			if (!opts.bindings) return
@@ -412,11 +397,11 @@ riot.tag('bs-form', '<form name="form" class="{ classes }"> <yield></yield> </fo
 					node.value = opts.bindings[node.name]
 				}
 			}
-		}.bind(this);
+		}.bind(this)
 
         this.save = function() {
             this.saveBindings()
-        }.bind(this);
+        }.bind(this)
 
 		this.saveBindings = function() {
 			if (!opts.bindings) return
@@ -431,7 +416,7 @@ riot.tag('bs-form', '<form name="form" class="{ classes }"> <yield></yield> </fo
 			}
 
 			opts.bindings.trigger('save', opts.bindings)
-		}.bind(this);
+		}.bind(this)
 
         this.applyDiagnoses = function() {
             if (!opts.diagnoses) return
@@ -451,11 +436,12 @@ riot.tag('bs-form', '<form name="form" class="{ classes }"> <yield></yield> </fo
                     if (!el) {
                         el = this.form[field]
                     }
-
-                    el.classList.add(klass)
+                    if (el) {
+                        el.classList.add(klass)
+                    }
                 }
             }
-        }.bind(this);
+        }.bind(this)
 
 		this.on('mount', function () {
 			this.load()
@@ -470,24 +456,29 @@ riot.tag('bs-form', '<form name="form" class="{ classes }"> <yield></yield> </fo
         this.on('updated', function () {
             this.applyDiagnoses()
         }.bind(this))
-	
-});
+}, '{ }');
 
 /**
  * bs-form-field
  *
  * @param string helptext
  */
-riot.tag('bs-form-field', '<fieldset class="{ classes }"> <yield></yield> <p if="{ opts.helptext }" class="help-block">{ opts.helptext }</p> </fieldset>', function(opts) {
+riot.tag2('bs-form-field', '<yield></yield> <p each="{helptext in helptexts}" class="help-block">{helptext}</p>', 'bs-form-field,[riot-tag="bs-form-field"] { display: block; }', 'class="{classes}"', function(opts) {
 		this.mixin('scope')
 
-		var classes = [
-			'form-group',
-            opts.status == 'error' ? 'has-error' : '',
-		]
-		this.classes = classes.join(' ')
-	
-});
+        this.on('update', function () {
+            this.classes = classes()
+            this.helptexts = typeof opts.helptext === 'array' ? opts.helptext : [opts.helptext]
+        })
+
+        function classes() {
+    		var classes = [
+    			'form-group',
+                opts.status == 'error' ? 'has-error' : '',
+    		]
+    		return classes.join(' ')
+        }
+}, '{ }');
 
 /**
  * bs-form-button
@@ -500,7 +491,7 @@ riot.tag('bs-form-field', '<fieldset class="{ classes }"> <yield></yield> <p if=
  * @param bool active - default is false.
  * @param function onpush
  */
-riot.tag('bs-form-button', '<button class="{ classes() }" type="{ opts.behavior || \'button\' }" __disabled="{ opts.disable }" onclick="{ opts.onpush }" role="button"> <yield></yield> </button>', function(opts) {
+riot.tag2('bs-form-button', '<button class="{classes()}" type="{opts.behavior || \'button\'}" __disabled="{opts.disable}" onclick="{opts.onpush}" role="button"> <yield></yield> </button>', '', '', function(opts) {
         this.mixin('scope')
 
         this.classes = function() {
@@ -529,97 +520,88 @@ riot.tag('bs-form-button', '<button class="{ classes() }" type="{ opts.behavior 
 
                 return sizes[name]
             }
-        }.bind(this);
-    
-});
+        }.bind(this)
+}, '{ }');
 
 /**
  * bs-form-static
  */
-riot.tag('bs-form-static', '<p class="{ classes }">{ opts.value }</p>', function(opts) {
+riot.tag2('bs-form-static', '<p class="{classes}">{opts.value}</p>', '', '', function(opts) {
 		var classes = [
 			'form-control-static',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-input
  */
-riot.tag('bs-form-input', '<input type="{ opts.type }" class="{ classes }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }">', function(opts) {
+riot.tag2('bs-form-input', '<input type="{opts.type}" class="{classes}" name="{opts.name}" value="{opts.value}" placeholder="{opts.placeholder}">', '', '', function(opts) {
 		var classes = [
 			'form-control',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-text
  */
-riot.tag('bs-form-text', '<label for="{ opts.id }">{ opts.label }<yield></yield></label> <input type="{ opts.type || \'text\' }" class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }">', function(opts) {
+riot.tag2('bs-form-text', '<label if="{opts.label}" for="{opts.id}">{opts.label}<yield></yield></label> <input type="{opts.type || \'text\'}" class="{classes}" id="{opts.id}" name="{opts.name}" value="{opts.value}" placeholder="{opts.placeholder}">', '', '', function(opts) {
 		var classes = [
 			'form-control',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-textarea
  */
-riot.tag('bs-form-textarea', '<label for="{ opts.id }">{ opts.label }<yield></yield></label> <textarea class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }" row="{ opts.row }" col="{ opts.col }">{ opts.value }</textarea>', function(opts) {
+riot.tag2('bs-form-textarea', '<label if="{opts.label}" for="{opts.id}">{opts.label}<yield></yield></label> <textarea class="{classes}" id="{opts.id}" name="{opts.name}" value="{opts.value}" placeholder="{opts.placeholder}" row="{opts.row}" col="{opts.col}">{opts.value}</textarea>', '', '', function(opts) {
 		var classes = [
 			'form-control',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-file
  */
-riot.tag('bs-form-file', '<input type="file" class="{ classes }" name="{ opts.name }" value="{ opts.value }">', function(opts) {
+riot.tag2('bs-form-file', '<input type="file" class="{classes}" name="{opts.name}" value="{opts.value}">', '', '', function(opts) {
 		var classes = [
 			'form-control-file',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-checkbox
  */
-riot.tag('bs-form-checkbox', '<label> <input type="checkbox" class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" placeholder="{ opts.placeholder }"> { opts.label } <yield></yield> </label>', 'class="checkbox"', function(opts) {
+riot.tag2('bs-form-checkbox', '<label> <input type="checkbox" class="{classes}" id="{opts.id}" name="{opts.name}" value="{opts.value}" placeholder="{opts.placeholder}"> {opts.label} <yield></yield> </label>', '', 'class="checkbox"', function(opts) {
 		var classes = [
 			'form-control',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-radio
  */
-riot.tag('bs-form-radio', '<label> <input type="radio" class="{ classes }" name="{ opts.name }" value="{ opts.value }" __checked="{ opts.checked }"> { opts.label } <yield></yield> </label>', 'class="radio"', function(opts) {
+riot.tag2('bs-form-radio', '<label> <input type="radio" class="{classes}" name="{opts.name}" value="{opts.value}" __checked="{opts.checked}"> {opts.label} <yield></yield> </label>', '', 'class="radio"', function(opts) {
 		var classes = [
 			'form-control',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-list-dropdown
  */
-riot.tag('bs-form-list-dropdown', '<label for="{ opts.id }">{ opts.label }</label> <select class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" __checked="{ opts.checked }"> <yield></yield> </select>', function(opts) {
+riot.tag2('bs-form-list-dropdown', '<label if="{opts.label}" for="{opts.id}">{opts.label}</label> <select class="{classes}" id="{opts.id}" name="{opts.name}" value="{opts.value}" __checked="{opts.checked}"> <yield></yield> </select>', '', '', function(opts) {
 		var classes = [
 			'form-control',
 		]
 		this.classes = classes.join(' ')
-	
-});
+}, '{ }');
 
 /**
  * bs-form-list-box
@@ -627,7 +609,7 @@ riot.tag('bs-form-list-dropdown', '<label for="{ opts.id }">{ opts.label }</labe
  * @param int items - [Required]
  * @param int rows - [Required]
  */
-riot.tag('bs-form-list-box', '<label for="{ opts.id }">{ opts.label }</label> <select class="{ classes }" id="{ opts.id }" name="{ opts.name }" value="{ opts.value }" __checked="{ opts.checked }"> <yield></yield> </select>', function(opts) {
+riot.tag2('bs-form-list-box', '<label if="{opts.label}" for="{opts.id}">{opts.label}</label> <select class="{classes}" id="{opts.id}" name="{opts.name}" value="{opts.value}" __checked="{opts.checked}"> <yield></yield> </select>', '', '', function(opts) {
 		var classes = [
 			'form-control',
 		]
@@ -646,15 +628,14 @@ riot.tag('bs-form-list-box', '<label for="{ opts.id }">{ opts.label }</label> <s
 				})
 			}
 		}.bind(this))
-	
-});
+}, '{ }');
 
 /**
  * bs-grid
  *
  * @param string type - {fixed | fluid}
  */
-riot.tag('bs-grid', '<yield></yield>', 'bs-grid, [riot-tag="bs-grid"]{ display: block; }', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-grid', '<yield></yield>', 'bs-grid,[riot-tag="bs-grid"] { display: block; }', 'class="{classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -670,14 +651,13 @@ riot.tag('bs-grid', '<yield></yield>', 'bs-grid, [riot-tag="bs-grid"]{ display: 
             }
             return types[name]
         }
-    
-});
+}, '{ }');
 
 /**
  * bs-grid-row
  *
  */
-riot.tag('bs-grid-row', '<yield></yield>', 'bs-grid-row, [riot-tag="bs-grid-row"]{ display: block; }', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-grid-row', '<yield></yield>', 'bs-grid-row,[riot-tag="bs-grid-row"] { display: block; }', 'class="{classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -685,8 +665,7 @@ riot.tag('bs-grid-row', '<yield></yield>', 'bs-grid-row, [riot-tag="bs-grid-row"
             opts.class || '',
         ]
         this.classes = classes.join(' ')
-    
-});
+}, '{ }');
 
 /**
  * bs-grid-col
@@ -695,7 +674,7 @@ riot.tag('bs-grid-row', '<yield></yield>', 'bs-grid-row, [riot-tag="bs-grid-row"
  * @param string size -  [Required] {xl-* | lg-* | md-* | sm-* | xs-*}
  * @param string offset - [Optional] {xl-* | lg-* | md-* | sm-* | xs-*}
  */
-riot.tag('bs-grid-col', '<yield></yield>', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-grid-col', '<yield></yield>', '', 'class="{classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -720,15 +699,14 @@ riot.tag('bs-grid-col', '<yield></yield>', 'class="{ classes }"', function(opts)
             var p = name.split('-')
             return 'col-' + p[0] + '-offset-' + p[1]
         }
-    
-});
+}, '{ }');
 
 /**
  * bs-jumbotron
  *
  * @param string type - {fixed | fluid}
  */
-riot.tag('bs-jumbotron', '<yield></yield>', 'bs-jumbotron, [riot-tag="bs-jumbotron"]{ display: block; }', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-jumbotron', '<yield></yield>', 'bs-jumbotron,[riot-tag="bs-jumbotron"] { display: block; }', 'class="{classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -744,8 +722,7 @@ riot.tag('bs-jumbotron', '<yield></yield>', 'bs-jumbotron, [riot-tag="bs-jumbotr
             }
             return types[name]
         }
-    
-});
+}, '{ }');
 
 /**
  * bs-label
@@ -753,7 +730,7 @@ riot.tag('bs-jumbotron', '<yield></yield>', 'bs-jumbotron, [riot-tag="bs-jumbotr
  * @param string type - {default | primary | success | info | warning | danger}
  * @param bool pill
  */
-riot.tag('bs-label', '<yield></yield>', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-label', '<yield></yield>', '', 'class="{classes}"', function(opts) {
         var classes = [
             'label',
             'label-' + (opts.type || 'default'),
@@ -761,14 +738,14 @@ riot.tag('bs-label', '<yield></yield>', 'class="{ classes }"', function(opts) {
             opts.class || '',
         ]
         this.classes = classes.join(' ')
-    
-});
+}, '{ }');
+
 /**
  * bs-list-group
  *
  * @param array items
  */
-riot.tag('bs-list-group', '<ul if="{ opts.items }" class="{ classes }"> <li each="{ opts.items }" class="{ \'list-group-item\': true, active: this.active, disabled: this.disabled }"> <span if="{ this.label }" class="label label-{ this.\'label-type\' || \'default\' } label-pill pull-right">{ this.label }</span> { this.title } </li> </ul> <yield if="{ !opts.items }"></yield>', function(opts) {
+riot.tag2('bs-list-group', '<ul if="{opts.items}" class="{classes}"> <li each="{opts.items}" class="{\'list-group-item\': true, active: this.active, disabled: this.disabled}"> <span if="{this.label}" class="label label-{this.\'label-type\' || \'default\'} label-pill pull-right">{this.label}</span> {this.title} </li> </ul> <yield if="{!opts.items}"></yield>', '', '', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -776,16 +753,15 @@ riot.tag('bs-list-group', '<ul if="{ opts.items }" class="{ classes }"> <li each
             opts.class || '',
         ]
         this.classes = classes.join(' ')
-    
-});
+}, '{ }');
 
 /**
  * bs-media
  *
  */
-riot.tag('bs-media', '<yield></yield>', 'class="media"', function(opts) {
-
+riot.tag2('bs-media', '<yield></yield>', '', 'class="media"', function(opts) {
 });
+
 /**
  * bs-modal
  *
@@ -795,7 +771,7 @@ riot.tag('bs-media', '<yield></yield>', 'class="media"', function(opts) {
  * @param bool keyboard - [Optional:true]
  * @param bool show - [Optional:true]
  */
-riot.tag('bs-modal', '<div name="dialog" class="modal-dialog" role="document"> <div class="modal-content"> <yield></yield> </div> </div>', 'bs-modal, [riot-tag="bs-modal"]{ display: block; }', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-modal', '<div name="dialog" class="modal-dialog" role="document"> <div class="modal-content"> <yield></yield> </div> </div>', 'bs-modal,[riot-tag="bs-modal"] { display: block; }', 'class="{classes}"', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -827,19 +803,19 @@ riot.tag('bs-modal', '<div name="dialog" class="modal-dialog" role="document"> <
 
         this.show = function() {
             $(this.root).modal('show')
-        }.bind(this);
+        }.bind(this)
 
         this.hide = function() {
             $(this.root).modal('hide')
-        }.bind(this);
+        }.bind(this)
 
         this.toggle = function() {
             $(this.root).modal('toggle')
-        }.bind(this);
+        }.bind(this)
 
         this.modal = function(options) {
             $(this.root).modal(options)
-        }.bind(this);
+        }.bind(this)
 
         $(this.root).on('loaded.bs.modal', function () {
             this.trigger('loaded', this)
@@ -860,35 +836,31 @@ riot.tag('bs-modal', '<div name="dialog" class="modal-dialog" role="document"> <
         $(this.root).on('hidden.bs.modal', function () {
             this.trigger('hidden', this)
         }.bind(this))
-    
-});
+}, '{ }');
 
 /**
  * bs-modal-header
  *
  * @param bool closebox
  */
-riot.tag('bs-modal-header', '<button if="{ opts.closebox }" type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> <span class="sr-only">Close</span> </button> <yield></yield>', 'bs-modal-header, [riot-tag="bs-modal-header"]{ display: block; }', 'class="modal-header"', function(opts) {
+riot.tag2('bs-modal-header', '<button if="{opts.closebox}" type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> <span class="sr-only">Close</span> </button> <yield></yield>', 'bs-modal-header,[riot-tag="bs-modal-header"] { display: block; }', 'class="modal-header"', function(opts) {
         this.mixin('scope')
-    
-});
+}, '{ }');
 
 /**
  * bs-modal-body
  *
  */
-riot.tag('bs-modal-body', '<yield></yield>', 'bs-modal-body, [riot-tag="bs-modal-body"]{ display: block; }', 'class="modal-body"', function(opts) {
+riot.tag2('bs-modal-body', '<yield></yield>', 'bs-modal-body,[riot-tag="bs-modal-body"] { display: block; }', 'class="modal-body"', function(opts) {
         this.mixin('scope')
-    
 });
 
 /**
  * bs-modal-footer
  *
  */
-riot.tag('bs-modal-footer', '<yield></yield>', 'bs-modal-footer, [riot-tag="bs-modal-footer"]{ display: block; }', 'class="modal-footer"', function(opts) {
+riot.tag2('bs-modal-footer', '<yield></yield>', 'bs-modal-footer,[riot-tag="bs-modal-footer"] { display: block; }', 'class="modal-footer"', function(opts) {
         this.mixin('scope')
-    
 });
 
 /**
@@ -897,7 +869,7 @@ riot.tag('bs-modal-footer', '<yield></yield>', 'bs-modal-footer, [riot-tag="bs-m
  * @param string type - {dark | light}
  * @param string placement - {fixed-top | fixed-bottom}
  */
-riot.tag('bs-navbar', '<nav if="{ !opts.collapse }" class="{ classes }"> <yield></yield> </nav> <nav if="{ opts.collapse }" class="{ classes }"> <button type="button" class="navbar-toggler hidden-sm-up" data-toggle="collapse"> &#9776; </button> <div class="collapse navbar-toggleable-xs"> <yield></yield> </div> </nav>', function(opts) {
+riot.tag2('bs-navbar', '<nav if="{!opts.collapse}" class="{classes}"> <yield></yield> </nav> <nav if="{opts.collapse}" class="{classes}"> <button type="button" class="navbar-toggler hidden-sm-up" data-toggle="collapse"> &#9776; </button> <div class="collapse navbar-toggleable-xs"> <yield></yield> </div> </nav>', '', '', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -908,8 +880,7 @@ riot.tag('bs-navbar', '<nav if="{ !opts.collapse }" class="{ classes }"> <yield>
             opts.class || '',
         ]
         this.classes = classes.join(' ')
-    
-});
+}, '{ }');
 
 /**
  * bs-nav
@@ -918,7 +889,7 @@ riot.tag('bs-navbar', '<nav if="{ !opts.collapse }" class="{ classes }"> <yield>
  * @param array items
  * @param string active
  */
-riot.tag('bs-nav', '<nav if="{ opts.type === \'inline\' && opts.items }" class="{ classes }"> <a each="{ opts.items }" class="{nav-link: true, active: this.name === opts.active, disabled: this.disabled}" href="{ this.link || \'#\' }" onclick="{ this.onclick }">{ this.title }</a> </nav> <nav if="{ opts.type === \'inline\' && !opts.items }" class="{ classes }"> <yield></yield> </nav> <ul if="{ opts.type !== \'inline\' && opts.items }" class="{ classes }"> <li each="{ opts.items }" class="nav-item"> <a class="{nav-link: true, active: this.name === parent.opts.active, disabled: this.disabled}" href="{ this.link || \'#\' }" onclick="{ this.onclick }">{ this.title }</a> </li> </ul> <ul if="{ opts.type !== \'inline\' && !opts.items }" class="{ classes }"> <yield></yield> </ul>', 'bs-nav, [riot-tag="bs-nav"]{ display: block; }', function(opts) {
+riot.tag2('bs-nav', '<nav if="{opts.type === \'inline\' && opts.items}" class="{classes}"> <a each="{opts.items}" class="{nav-link: true, active: this.name === opts.active, disabled: this.disabled}" href="{this.link || \'#\'}" onclick="{this.onclick}">{this.title}</a> </nav> <nav if="{opts.type === \'inline\' && !opts.items}" class="{classes}"> <yield></yield> </nav> <ul if="{opts.type !== \'inline\' && opts.items}" class="{classes}"> <li each="{opts.items}" class="nav-item"> <a class="{nav-link: true, active: this.name === parent.opts.active, disabled: this.disabled}" href="{this.link || \'#\'}" onclick="{this.onclick}">{this.title}</a> </li> </ul> <ul if="{opts.type !== \'inline\' && !opts.items}" class="{classes}"> <yield></yield> </ul>', 'bs-nav,[riot-tag="bs-nav"] { display: block; }', '', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -938,10 +909,9 @@ riot.tag('bs-nav', '<nav if="{ opts.type === \'inline\' && opts.items }" class="
             }
             return types[name]
         }
-    
-});
+}, '{ }');
 
-riot.tag('bs-table', '<table class="{ classes }"> <yield></yield> </table>', function(opts) {
+riot.tag2('bs-table', '<table class="{classes}"> <yield></yield> </table>', '', '', function(opts) {
         this.mixin('scope')
 
         var classes = [
@@ -949,12 +919,11 @@ riot.tag('bs-table', '<table class="{ classes }"> <yield></yield> </table>', fun
             opts.class || '',
         ]
         this.classes = classes.join(' ')
-    
-});
-riot.tag('bs-tooltip', '', function(opts) {
+}, '{ }');
 
-
+riot.tag2('bs-tooltip', '', '', '', function(opts) {
 });
+
 
 var FormModel = function () {
     riot.observable(this)

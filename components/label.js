@@ -4,7 +4,7 @@
  * @param string type - {default | primary | success | info | warning | danger}
  * @param bool pill
  */
-riot.tag('bs-label', '<yield></yield>', 'class="{ classes }"', function(opts) {
+riot.tag2('bs-label', '<yield></yield>', '', 'class="{classes}"', function(opts) {
         var classes = [
             'label',
             'label-' + (opts.type || 'default'),
@@ -12,5 +12,4 @@ riot.tag('bs-label', '<yield></yield>', 'class="{ classes }"', function(opts) {
             opts.class || '',
         ]
         this.classes = classes.join(' ')
-    
-});
+}, '{ }');
