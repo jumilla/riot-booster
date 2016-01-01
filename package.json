@@ -1,7 +1,7 @@
 {
   "name": "riot-booster",
   "version": "0.0.7",
-  "description": "Twitter Bootstrap 4 on Riot 2.2",
+  "description": "Twitter Bootstrap 4 on Riot 2.3",
   "keywords": [
     "css",
     "riot",
@@ -35,7 +35,7 @@
     "url": "https://github.com/jumilla/riot-booster/issues"
   },
   "dependencies": {
-    "riot": "^2.3.0"
+    "riot": "^2.3.12"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
